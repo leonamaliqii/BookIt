@@ -1,42 +1,43 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
-import authRoute from "./routes/auth.js"
-import usersRoute from "./routes/users.js"
-import hotelsRoute from "./routes/hotels.js"
-import roomsRoute from "./routes/rooms.js"
+import authRoute from "./routes/auth.js";
+import usersRoute from "./routes/users.js";
+import hotelsRoute from "./routes/hotels.js";
+import roomsRoute from "./routes/rooms.js";
+
 const app = express();
 dotenv.config();
 
+// Middleware to read JSON in requests
+app.use(express.json());
 
+// Connect to MongoDB
 const connect = async () => {
-try {
-  await mongoose.connect(process.env.MONGO);
-  console.log("Connected to MongoDB.");
-} catch (error) {
-  throw error;
-}
+  try {
+    await mongoose.connect(process.env.MONGO);
+    console.log("Connected to MongoDB.");
+  } catch (error) {
+    throw error;
+  }
 };
 
-//kur lidhja me db shkeputet, na del mesazhi me poshte
+// MongoDB connection status logs
 mongoose.connection.on("disconnected", () => {
   console.log("MongoDB disconnected!");
 });
-
 mongoose.connection.on("connected", () => {
   console.log("MongoDB connected!");
 });
- 
-//middleware
-//kur bojm kerkesa ne kete endpoint, e perdor authRoute
-app.use("/auth" ,authRoute);
-app.use("/users" ,usersRoute);
-app.use("/hotels" ,hotelsRoute);
-app.use("/rooms" ,roomsRoute);
 
-//start the server and listen to requests on port 3000
+// Routes
+app.use("/api/auth", authRoute);
+app.use("/api/users", usersRoute);
+app.use("/api/hotels", hotelsRoute); // ✅ hotels route fixed
+app.use("/api/rooms", roomsRoute);
+
+// Start server
 app.listen(3000, () => {
-    connect();
-    console.log("Connected to backend.");//konfirmon qe serveri ka filluar dhe eshte i gatshëm te pranoj kerkesa
-    
-}); 
+  connect();
+  console.log("Connected to backend.");
+});
