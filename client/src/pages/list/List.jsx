@@ -1,19 +1,38 @@
 import "./list.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
-import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 
-
 const List = () => {
   const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  const navigate = useNavigate();
+
+  // safe defaults if location.state is null
+  const [destination, setDestination] = useState(location.state?.destination || "");
+  const [date, setDate] = useState(
+    location.state?.date || [
+      {
+        startDate: new Date(),
+        endDate: new Date(),
+        key: "selection",
+      },
+    ]
+  );
   const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
+  const [options, setOptions] = useState(
+    location.state?.options || { adult: 1, children: 0, room: 1 }
+  );
+
+  // redirect back to home if no state provided
+  useEffect(() => {
+    if (!location.state) {
+      navigate("/");
+    }
+  }, [location, navigate]);
 
   return (
     <div>
@@ -25,7 +44,10 @@ const List = () => {
             <h1 className="lsTitle">Search</h1>
             <div className="lsItem">
               <label>Destination</label>
-              <input placeholder={destination} type="text" />
+              <input
+                placeholder={destination || "Where are you going?"}
+                type="text"
+              />
             </div>
             <div className="lsItem">
               <label>Check-in Date</label>
@@ -88,12 +110,6 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
             <SearchItem />
             <SearchItem />
             <SearchItem />
