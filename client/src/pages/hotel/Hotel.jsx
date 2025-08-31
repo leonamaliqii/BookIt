@@ -13,6 +13,8 @@ import {
 import { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { useLocation } from "react-router-dom";
+import { SearchContext } from "../../context/SearchContext";
+import { useContext } from "react";
 
 const Hotel = () => {
   const location = useLocation();
@@ -20,12 +22,12 @@ const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
   const [open, setOpen] = useState(false);
 
-  /*const { data, loading, error } = useFetch(`/hotels/find/${id}`);*/
-  const { data, loading, error } = useFetch(`http://localhost:8800/hotels/find/${id}`);
+  
+  const { data, loading, error } = useFetch(`http://localhost:8800/api/hotels/find/${id}`);
 
+  const {dates} = useContext(SearchContext);
 
-
-
+  console.log(dates);
 
   const handleOpen = (i) => {
     setSlideNumber(i);
