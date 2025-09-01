@@ -7,6 +7,8 @@ const useFetch = (url) => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
+    if (!url) return; // ⬅ Skip fetch if URL is null or undefined**
+
     const fetchData = async () => {
         setLoading(true);
         try {
@@ -22,6 +24,8 @@ const useFetch = (url) => {
     }, [url]);
 
 const reFetch = async () => {
+    if (!url) return; // ⬅ Skip if URL is null or undefined**
+
         setLoading(true);
         try {
             const res = await axios.get(url);
