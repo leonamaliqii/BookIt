@@ -10,6 +10,7 @@ import { format } from "date-fns";
 import { useNavigate } from 'react-router-dom';
 import { SearchContext } from "../../context/SearchContext"; 
 import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
   const Header = ({type}) => {
   const [destination, setDestination] = useState("");
