@@ -38,7 +38,7 @@ mongoose.connection.on("connected", () => {
 // Routes
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
-app.use("/api/hotels", hotelsRoute); // ✅ hotels route fixed
+app.use("/api/hotels", hotelsRoute); 
 app.use("/api/rooms", roomsRoute);
 
 app.use((err,req, res, next) => {

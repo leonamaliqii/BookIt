@@ -28,6 +28,7 @@ import { useContext } from 'react';
   });
 
     const navigate = useNavigate();
+    const {user} = useContext(AuthContext);
 
 
   const handleOption = (name, operation) => {
@@ -77,7 +78,7 @@ import { useContext } from 'react';
 
         <h1 className="headerTitle">Nothing beats a JET2 holiday.</h1>
         <p className="HeaderDesc">And right now, you can say 50$ per person, thats 200$ off for a family of four.</p>
-        <button className="headerBtn">Sign in / Register</button>
+      { !user && ( <button className="headerBtn">Sign in / Register</button>)}
 
         <div className="headerSearch">
           <div className="headerSearchItem">
