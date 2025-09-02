@@ -3,13 +3,20 @@ import { useReducer } from "react";
 
 const INITIAL_STATE = {
   city: undefined,
-  dates: [],
+  dates: [
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ],
   options: {
-    adult: undefined,
-    children: undefined,
-    room: undefined
-  }
+    adult: 1,
+    children: 0,
+    room: 1,
+  },
 };
+
 
 
 export const SearchContext = createContext(INITIAL_STATE);
