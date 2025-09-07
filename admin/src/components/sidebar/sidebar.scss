@@ -58,4 +58,28 @@
             }
         }
     }
+    .bottom{
+        display: flex;
+        align-items: center;
+        margin: 10px;
+
+        .colorOption{
+            width: 20px;
+            height:20px;
+            border-radius: 5px;
+            border: 1px solid #7451f8;
+            cursor: pointer;
+            margin: 5px ;
+
+            &:nth-child(1){
+                background-color: #f5e8ff;
+
+            }
+            &:nth-child(2){
+                background-color: #333;
+                
+            }
+         
+        }
+    }
 }
