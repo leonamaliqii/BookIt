@@ -2,7 +2,7 @@ import React from 'react'
 
 const Widget=()=>{
     return(
-        <div>Widget</div>
+        <div className="widget">Widget</div>
     )
 }
 
