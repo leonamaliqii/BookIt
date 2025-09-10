@@ -4,6 +4,7 @@ import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { productInputs, userInputs } from "./fromSource";
 
 
 
@@ -22,7 +23,7 @@ function App() {
               <Route path=":userId" element={<Single />} />
               <Route
                 path="new"
-                element={<New />}
+                element={<New inputs={userInputs} titile="Add New User"/>}
               />
             </Route>
             <Route path="products">
@@ -30,7 +31,7 @@ function App() {
               <Route path=":productId" element={<Single />} />
               <Route
                 path="new"
-                element={<New />}/>
+                element={<New inputs={productInputs} title="Add New Product" />}/>
               
             </Route>
           </Route>
