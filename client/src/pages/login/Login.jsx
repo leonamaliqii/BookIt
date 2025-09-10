@@ -26,7 +26,7 @@ const Login = () => {
         "http://localhost:8800/api/auth/login",
         credentials
       );
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       console.log("Logged in user:", res.data);
         navigate("/");
     } catch (err) {

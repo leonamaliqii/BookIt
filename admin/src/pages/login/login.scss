@@ -1,0 +1,109 @@
+/* Background */
+.login {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0d153d, #0d153d); /* dark bg */
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Container */
+.lContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 40px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  width: 320px;
+  text-align: center;
+}
+
+.lContainer h2 {
+  margin-bottom: 10px;
+  color:  #0d153d;
+  font-size: 1.5rem;
+}
+
+/* Inputs */
+.lInput {
+  height: 40px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.lInput:focus {
+  border-color: #5563DE;
+  box-shadow: 0 0 6px rgba(85, 99, 222, 0.3);
+}
+
+/* Button */
+.lButton {
+  border: none;
+  padding: 12px;
+  background: #c6007e;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.lButton:hover:not(:disabled) {
+  background: #3f4bbd;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.lButton:disabled {
+  background: #b3b8f2;
+  cursor: not-allowed;
+}
+
+/* Options (Remember + Forgot) */
+.lOptions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.lOptions label {
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lOptions .forgot {
+  color: #5563DE;
+  text-decoration: none;
+}
+
+.lOptions .forgot:hover {
+  text-decoration: underline;
+}
+
+/* Register */
+.register {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #333;
+}
+
+.register a {
+  color: #c6007e;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.register a:hover {
+  text-decoration: underline;
+}
