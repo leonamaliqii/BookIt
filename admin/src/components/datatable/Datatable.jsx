@@ -8,7 +8,7 @@ import useFetch from "../../hooks/useFetch";
 const Datatable = () => {
 
 
-  const {data, loading, error} = useFetch("/users")
+const {data, loading, error} = useFetch("http://localhost:8800/api/users")
 
   const handleDelete = (id) => {
    // setData(data.filter((item) => item.id !== id));

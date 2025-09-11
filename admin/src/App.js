@@ -33,7 +33,7 @@ function App() {
                <Home />
               </ProtectedRoute>
               } />
-            <Route path="login" element={<Login />} />
+            
             <Route path="users">
               <Route index element={   <ProtectedRoute>
                <List />
@@ -43,11 +43,12 @@ function App() {
               </ProtectedRoute>} />
               <Route
                 path="new"
-                element={<ProtectedRoute><New inputs={userInputs} titile="Add New User"/></ProtectedRoute>}
+                element={<ProtectedRoute><New inputs={userInputs} title="Add New User"/></ProtectedRoute>}
               />
             </Route>
             <Route path="products">
-              <Route index element={<List />} />
+              <Route index element={
+                <ProtectedRoute><List /></ProtectedRoute>} />
               <Route path=":productId" element={<ProtectedRoute>
                 <Single />
                 </ProtectedRoute>} />
