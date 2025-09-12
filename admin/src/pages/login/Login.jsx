@@ -1,5 +1,5 @@
 import "./login.scss";
-import { useContext, useState, useEffect, use } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,9 +10,8 @@ const Login = () => {
     password: "",
   });
 
-  const {  loading, error, dispatch } = useContext(AuthContext);
-
-  const navigate =  useNavigate();
+  const { loading, error, dispatch } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -21,23 +20,32 @@ const Login = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
+
     try {
       const res = await axios.post(
         "http://localhost:8800/api/auth/login",
         credentials
       );
-      
+
       console.log("Logged in user:", res.data);
-      if(res.data.isAdmin){
+
+      if (res.data.isAdmin) {
+        // Dispatch success with user details
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
-         navigate("/");
-      }else{
+
+        // Store JWT token in localStorage
+        localStorage.setItem("token", res.data.accessToken);
+
+        // Optional: store user info
+        localStorage.setItem("user", JSON.stringify(res.data.details));
+
+        navigate("/"); // redirect to dashboard
+      } else {
         dispatch({
-        type: "LOGIN_FAILURE",
-        payload: { message: "You are not admin!" },
-      });
+          type: "LOGIN_FAILURE",
+          payload: { message: "You are not admin!" },
+        });
       }
-       
     } catch (err) {
       console.log("Error response:", err.response?.data);
       dispatch({
@@ -49,17 +57,13 @@ const Login = () => {
 
   useEffect(() => {
     if (error) {
-      const clearError = () =>
-        dispatch({ type: "LOGIN_FAILURE", payload: null });
+      const clearError = () => dispatch({ type: "LOGIN_FAILURE", payload: null });
       document.getElementById("username").addEventListener("input", clearError);
       document.getElementById("password").addEventListener("input", clearError);
+
       return () => {
-        document
-          .getElementById("username")
-          .removeEventListener("input", clearError);
-        document
-          .getElementById("password")
-          .removeEventListener("input", clearError);
+        document.getElementById("username").removeEventListener("input", clearError);
+        document.getElementById("password").removeEventListener("input", clearError);
       };
     }
   }, [error, dispatch]);

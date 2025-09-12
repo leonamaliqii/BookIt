@@ -1,47 +1,63 @@
-import User from '../models/User.js';
-import bcrypt from 'bcryptjs';
+// controllers/authController.js
+import User from "../models/User.js";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 import { createError } from "../utils/error.js";
-import jwt from 'jsonwebtoken';
 
-
-
+// REGISTER NEW USER
 export const register = async (req, res, next) => {
-    try{
+  try {
+    // Hash password
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(req.body.password, salt);
 
-        const salt = bcrypt.genSaltSync(10);
-        const hash= bcrypt.hashSync(req.body.password, salt);
+    // Create user
+    const newUser = new User({
+      username: req.body.username,
+      email: req.body.email,
+      password: hashedPassword,
+      isAdmin: req.body.isAdmin || false, // default false
+    });
 
-        const newUser = new User({
-            ...req.body,
-            password: hash, 
-        });
+    const savedUser = await newUser.save();
 
-        await newUser.save();
-        res.status(201).send("User has been created");
-    }catch(err){
-       next(err);
-    }
-}
+    // Remove password before sending response
+    const { password, ...userDetails } = savedUser._doc;
 
+    res.status(201).json(userDetails);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// LOGIN USER
 export const login = async (req, res, next) => {
-    try{
-        const user=await User.findOne({username: req.body.username});
-        if(!user) return next(createError(404, "User not found!"));
+  try {
+    const user = await User.findOne({ username: req.body.username });
 
-        // Check if the password is correct
-        const isPasswordCorrect = await bcrypt.compare(req.body.password, user.password);
-         if(!isPasswordCorrect) return next(createError(400, "Wrong password or username!"));
+    if (!user) return next(createError(404, "User not found!"));
 
-         const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT);
+    const isPasswordCorrect = bcrypt.compareSync(req.body.password, user.password);
 
-        const { password, isAdmin, ...otherDetails } = user._doc;
+    if (!isPasswordCorrect) return next(createError(400, "Wrong password!"));
 
+    // Create JWT token
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT, // your secret key from .env
+      { expiresIn: "1d" }
+    );
 
-        // If everything is ok, send the user details
-        res.cookie("access_token", token, {httpOnly
-            : true,
-        }).status(200).json({details:{...otherDetails} ,isAdmin});
-    }catch(err){
-       next(err);
-    }
+    // Remove password from response
+    const { password, ...userDetails } = user._doc;
+
+    // Send response with token and user details
+    res.status(200).json({
+      details: userDetails,
+      accessToken: token,
+      isAdmin: user.isAdmin,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
