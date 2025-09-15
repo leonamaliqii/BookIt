@@ -1,11 +1,11 @@
-import "./new.scss";
+import "./newRoom.scss";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useState } from "react";
 import { columnGroupsStateInitializer } from "@mui/x-data-grid/internals";
 
-const New = ({inputs,title}) => {
+const NewRoom = ({inputs,title}) => {
 
     
   const [file, setFile] = useState("");
@@ -62,4 +62,4 @@ const New = ({inputs,title}) => {
     )
 }
 
-export default New;
+export default NewRoom;
