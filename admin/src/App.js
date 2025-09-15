@@ -8,6 +8,8 @@ import { productInputs, userInputs } from "./fromSource";
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext"; // adjust path to your context
+import { userColumns } from "./datatablesource";
+import { hotelColumns } from "./datatablesource";
 
 
 
@@ -36,7 +38,7 @@ function App() {
             
             <Route path="users">
               <Route index element={   <ProtectedRoute>
-               <List />
+               <List columns = {userColumns} />
               </ProtectedRoute>} />
               <Route path=":userId" element={   <ProtectedRoute>
                <Single />
@@ -46,10 +48,10 @@ function App() {
                 element={<ProtectedRoute><New inputs={userInputs} title="Add New User"/></ProtectedRoute>}
               />
             </Route>
-            <Route path="products">
+            <Route path="hotels">
               <Route index element={
-                <ProtectedRoute><List /></ProtectedRoute>} />
-              <Route path=":productId" element={<ProtectedRoute>
+                <ProtectedRoute><List columns={hotelColumns} /></ProtectedRoute>} />
+              <Route path=":hotelId" element={<ProtectedRoute>
                 <Single />
                 </ProtectedRoute>} />
               <Route

@@ -4,17 +4,27 @@ import { userColumns } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
+import { hotelColumns } from "../../datatablesource";
 
-const Datatable = () => {
+const Datatable = ({columns}) => {
+  const location = useLocation();
+  const path = location.pathname.split("/")[1];
+  const [list, setList] = useState();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  /*const {data, loading, error} = useFetch("/$${path}")*/
+
+   useEffect(() => {
+    setList(data);
+  }, [data]);
 
   // Get token from localStorage
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const fetchUsers = async () => {
+    const fetchData = async () => {
       if (!token) {
         setError({ message: "No token found. Please log in first." });
         return;
@@ -22,7 +32,7 @@ const Datatable = () => {
 
       setLoading(true);
       try {
-        const res = await axios.get("http://localhost:8800/api/users", {
+        const res = await axios.get(`http://localhost:8800/api/${path}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -36,13 +46,20 @@ const Datatable = () => {
       }
     };
 
-    fetchUsers();
-  }, [token]);
+    fetchData();
+  }, [token, path]);
 
-  const handleDelete = (id) => {
-    // Optional: implement delete functionality here
-    setData((prev) => prev.filter((item) => item._id !== id));
-  };
+ const handleDelete = async (id) => {
+  try {
+    await axios.delete(`http://localhost:8800/api/${path}/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    setList(list.filter((item) => item._id !== id));
+  } catch (err) {
+    console.error("Delete failed:", err.response?.data || err.message);
+  }
+};
+
 
   const actionColumn = [
     {
@@ -81,8 +98,8 @@ const Datatable = () => {
       ) : (
         <DataGrid
           className="datagrid"
-          rows={data || []}
-          columns={userColumns.concat(actionColumn)}
+          rows={list}
+          columns={columns.concat(actionColumn)}
           pageSize={9}
           rowsPerPageOptions={[9]}
           checkboxSelection
