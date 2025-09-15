@@ -10,6 +10,7 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "./context/AuthContext"; // adjust path to your context
 import { userColumns } from "./datatablesource";
 import { hotelColumns } from "./datatablesource";
+import NewHotel from "./pages/newHotel/NewHotel";
 
 
 
@@ -58,7 +59,7 @@ function App() {
                 path="new"
                 element={
                 <ProtectedRoute>
-                  <New inputs={productInputs} title="Add New Product" />
+                  <NewHotel/>
                   </ProtectedRoute>
                 }
                   />
