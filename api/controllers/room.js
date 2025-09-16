@@ -80,12 +80,22 @@ try {
   }
 }
 //getall
-export const getAllRooms = async(req, res, next) => {
-       
-      try {
-        const rooms = await Room.find();
-        res.status(200).json(rooms);
-      } catch (err){
-        next(err);
-      }
-}
+//getall
+export const getAllRooms = async (req, res, next) => {
+  try {
+    const rooms = await Room.find(); // fetch all rooms
+
+    // Attach hotelId to each room
+    const roomsWithHotel = await Promise.all(
+      rooms.map(async (room) => {
+        // Find the hotel that includes this room
+        const hotel = await Hotel.findOne({ rooms: room._id });
+        return { ...room._doc, hotelId: hotel?._id }; // include hotelId
+      })
+    );
+
+    res.status(200).json(roomsWithHotel);
+  } catch (err) {
+    next(err);
+  }
+};

@@ -49,16 +49,23 @@ const Datatable = ({columns}) => {
     fetchData();
   }, [token, path]);
 
- const handleDelete = async (id) => {
+const handleDelete = async (id, hotelId) => {
   try {
-    await axios.delete(`http://localhost:8800/api/${path}/${id}`, {
-      headers: { Authorization: `Bearer ${token}` }
+    let url = `http://localhost:8800/api/${path}/${id}`;
+    if (path === "rooms") {
+      url += `/${hotelId}`; // only add hotelId for rooms
+    }
+
+    await axios.delete(url, {
+      headers: { Authorization: `Bearer ${token}` },
     });
+
     setList(list.filter((item) => item._id !== id));
   } catch (err) {
     console.error("Delete failed:", err.response?.data || err.message);
   }
 };
+
 
 
   const actionColumn = [
@@ -72,11 +79,16 @@ const Datatable = ({columns}) => {
             <div className="viewButton">View</div>
           </Link>
           <div
-            className="deleteButton"
-            onClick={() => handleDelete(params.row._id)}
-          >
-            Delete
-          </div>
+  className="deleteButton"
+  onClick={() =>
+    path === "rooms"
+      ? handleDelete(params.row._id, params.row.hotelId) // rooms need hotelId
+      : handleDelete(params.row._id) // users & hotels only need id
+  }
+>
+  Delete
+</div>
+
         </div>
       ),
     },
@@ -85,7 +97,7 @@ const Datatable = ({columns}) => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        Add New User
+        {path}
         <Link to={`/${path}/new`} className="link">
           Add New
         </Link>
