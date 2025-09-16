@@ -4,6 +4,8 @@ import List from "./pages/list/List";
 import Hotel from "./pages/hotel/Hotel";
 import { SearchContext } from "./context/SearchContext";
 import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+
 
 
 
@@ -16,6 +18,8 @@ function App() {
         <Route path="/hotels" element={<List/>} />
         <Route path="/hotels/:id" element={<Hotel/>} />
         <Route path="/login" element={<Login/>} />
+        <Route path="register" element={<Register />} />
+
       </Routes>
     </BrowserRouter>
   );

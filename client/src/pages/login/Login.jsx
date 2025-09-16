@@ -3,6 +3,7 @@ import { useContext, useState, useEffect, use } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -93,8 +94,8 @@ const Login = () => {
         )}
 
         <p className="register">
-          Don’t have an account? <a href="#">Register</a>
-        </p>
+  Don’t have an account? <Link to="/register">Register</Link>
+</p>
       </div>
     </div>
   );

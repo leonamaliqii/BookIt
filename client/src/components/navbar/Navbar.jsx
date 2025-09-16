@@ -18,7 +18,7 @@ const Navbar = () => {
             <button className="navButton">Register</button>
           </Link>
           <Link to="/login" style={{color:"inherit", textDecoration:"none"}}>
-            <button className="navButtsson">Login</button>
+            <button className="navButton">Login</button>
           </Link>
         </div>)}
       </div>
