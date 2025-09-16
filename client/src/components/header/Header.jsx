@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { SearchContext } from "../../context/SearchContext"; 
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { Link, useLocation } from "react-router-dom";
 
   const Header = ({type}) => {
   const [destination, setDestination] = useState("");
@@ -46,15 +47,18 @@ import { AuthContext } from '../../context/AuthContext';
     navigate("/hotels", { state: { destination, dates, options } });
   }
 
+  const location = useLocation();
   return (
     <div className="header">
       <div className="headerContainer">
 
-        <div className="headerList">
-          <div className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
-          </div>
+       <div className="headerList">
+    <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+        <div className={`headerListItem ${location.pathname === "/" ? "active" : ""}`}>
+          <FontAwesomeIcon icon={faBed} />
+          <span>Stays</span>
+        </div>
+      </Link>
 
           <div className="headerListItem">
             <FontAwesomeIcon icon={faPlane} />

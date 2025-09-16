@@ -85,6 +85,10 @@
     cursor:pointer;
 }
 
+.headerListItem:hover {
+  background-color: #323a84; /* blue background */
+  color: white;               /* text color on hover */
+}
 .date{
     position: absolute ;
     top:50px;
@@ -130,3 +134,5 @@
     cursor: not-allowed;
     
 }
+
+
