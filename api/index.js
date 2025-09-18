@@ -9,6 +9,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import vehiclesRoute from './routes/vehicles.js';
 import rentalsRoute from './routes/rentals.js';
+import companiesRouter from "./routes/companies.js";
 
 
 
@@ -45,6 +46,7 @@ app.use("/api/hotels", hotelsRoute);
 app.use("/api/rooms", roomsRoute);
 app.use('/api/vehicles', vehiclesRoute);
 app.use('/api/rentals', rentalsRoute);
+app.use("/api/companies", companiesRouter);
 
 app.use((err,req, res, next) => {
     const errorStatus = err.status || 500;

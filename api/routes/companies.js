@@ -1,0 +1,70 @@
+// routes/companies.js
+import express from "express";
+import { pool } from "../db.js";
+
+const router = express.Router();
+
+// Count companies by city
+router.get("/countByCity", async (req, res) => {
+  const { cities } = req.query; // expects "Prishtine,Gjakove,Peja"
+  const cityList = cities.split(",");
+  try {
+    const counts = [];
+    for (const city of cityList) {
+      const result = await pool.query(
+        "SELECT COUNT(*) FROM companies WHERE city ILIKE $1",
+        [city]
+      );
+      counts.push(Number(result.rows[0].count));
+    }
+    res.json(counts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// Get companies (with vehicles) by city
+router.get("/", async (req, res) => {
+  const { city } = req.query;
+  try {
+    let query = `
+      SELECT
+        c.id,
+        c.name,
+        c.city,
+        c.description,
+        c.logo,
+        c.photo,
+        COALESCE(
+          json_agg(
+            json_build_object(
+              'id', v.id,
+              'brand', v.brand,
+              'model', v.model,
+              'year', v.year,
+              'price_per_day', v.price_per_day,
+              'photo', v.photo
+            )
+          ) FILTER (WHERE v.id IS NOT NULL),
+          '[]'
+        ) AS vehicles
+      FROM companies c
+      LEFT JOIN vehicles v ON v.company_id = c.id
+    `;
+    const values = [];
+    if (city) {
+      query += ` WHERE c.city ILIKE $1`;
+      values.push(`%${city}%`);
+    }
+    query += ` GROUP BY c.id ORDER BY c.name`;
+
+    const result = await pool.query(query, values);
+    res.json(result.rows);
+  } catch (err) {
+    console.error("GET /api/companies error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+export default router;
