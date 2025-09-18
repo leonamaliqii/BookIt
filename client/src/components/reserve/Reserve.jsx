@@ -32,7 +32,7 @@ const Reserve = ({ setOpen, hotelId }) => {
   const alldates = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
   const isAvailable = (roomNumber) => {
-    const isFound = roomNumber.unavailableDates.some((date) =>
+    const isFound = roomNumber.unavailableDates?.some((date) =>
       alldates.includes(new Date(date).getTime())
     );
     return !isFound;
@@ -49,11 +49,9 @@ const Reserve = ({ setOpen, hotelId }) => {
     );
   };
 
-  
   useEffect(() => {
     console.log("Selected Rooms:", selectedRooms);
   }, [selectedRooms]);
-
 
   const navigate = useNavigate();
   const handleClick = async () => {
@@ -68,11 +66,9 @@ const Reserve = ({ setOpen, hotelId }) => {
         })
       );
 
-      
       alert("Rooms reserved successfully!");
       setOpen(false);
-        navigate("/");
-
+      navigate("/");
     } catch (err) {
       console.error(err);
       alert("Something went wrong. Please try again.");
@@ -90,31 +86,35 @@ const Reserve = ({ setOpen, hotelId }) => {
         <span>Select your rooms:</span>
         {loading
           ? "Loading..."
-          : data.map((item) => (
-              <div className="rItem" key={item._id}>
-                <div className="rItemInfo">
-                  <div className="rTitle">{item.title}</div>
-                  <div className="rDesc">{item.desc}</div>
-                  <div className="rMax">
-                    Max people: <b>{item.maxPeople}</b>
-                  </div>
-                  <div className="rPrice">{item.price}</div>
-                </div>
-                <div className="rSelectRooms">
-                  {item.roomNumbers.map((roomNumber) => (
-                    <div className="room" key={roomNumber._id}>
-                      <label>{roomNumber.number}</label>
-                      <input
-                        type="checkbox"
-                        value={roomNumber._id}
-                        onChange={handleSelect}
-                        disabled={!isAvailable(roomNumber)}
-                      />
+          : data
+              ?.filter((item) => item) // <-- Filter out null rooms
+              .map((item) => (
+                <div className="rItem" key={item._id}>
+                  <div className="rItemInfo">
+                    <div className="rTitle">{item?.title}</div>
+                    <div className="rDesc">{item?.desc}</div>
+                    <div className="rMax">
+                      Max people: <b>{item?.maxPeople}</b>
                     </div>
-                  ))}
+                    <div className="rPrice">{item?.price}</div>
+                  </div>
+                  <div className="rSelectRooms">
+                    {item?.roomNumbers?.map((roomNumber) =>
+                      roomNumber ? (
+                        <div className="room" key={roomNumber._id}>
+                          <label>{roomNumber.number}</label>
+                          <input
+                            type="checkbox"
+                            value={roomNumber._id}
+                            onChange={handleSelect}
+                            disabled={!isAvailable(roomNumber)}
+                          />
+                        </div>
+                      ) : null
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
         <button onClick={handleClick} className="rButton">
           Reserve Now!
         </button>
