@@ -1,0 +1,42 @@
+.carRentalsHeader {
+  
+ /* height: 70px;*/
+  margin: 20px 0px 100px 0px;
+  background-color: #0d153d;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+/*.carRentalsHeader h1 {
+  margin-bottom: 8px;
+  font-size: 28px;
+}*/
+
+/*.carRentalsHeader p {
+  margin-bottom: 0px;
+  font-size: 16px;
+}*/
+
+.carRentalsSearchContainer {
+  position: absolute;
+  bottom: -20px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.carRentalsSearchContainer .headerSearch {
+  max-width: 800px;
+  width: 90%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  border: 3px solid #c6007e;
+  background-color: white;
+  border-radius: 5px;
+}

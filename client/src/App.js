@@ -5,6 +5,10 @@ import Hotel from "./pages/hotel/Hotel";
 import { SearchContext } from "./context/SearchContext";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
+import CarRentals from "./pages/carRentals/CarRentals";
+
+
+
 
 
 
@@ -19,6 +23,7 @@ function App() {
         <Route path="/hotels/:id" element={<Hotel/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="register" element={<Register />} />
+         <Route path="/rentals" element={<CarRentals />} />
 
       </Routes>
     </BrowserRouter>
