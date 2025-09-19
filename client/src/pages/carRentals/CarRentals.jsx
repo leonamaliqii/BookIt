@@ -12,6 +12,12 @@ const CarRentals = () => {
   const { city } = location.state || {}; 
   const [companies, setCompanies] = useState([]);
 
+  const popularCompanies = [
+  { id: 1, name: "Grande Rent a Car", photo: "https://res.cloudinary.com/dicr6ysyv/image/upload/v1758291475/rent-a-car-prishtina_zmpgj0.png" },
+  { id: 2, name: "U-Drive", photo: "https://res.cloudinary.com/dicr6ysyv/image/upload/v1758291475/Udrive-Rent-a-Car-Prishtina_ybjsyv.jpg" },
+  { id: 3, name: "AutoLux", photo: "https://res.cloudinary.com/dicr6ysyv/image/upload/v1758291982/renta_mlnzks.jpg" },
+];
+
   useEffect(() => {
     const fetchCompanies = async () => {
       if (!city) return; 
@@ -32,6 +38,16 @@ const CarRentals = () => {
     <div>
       <Navbar />
       <Header type="list" page="carRentals" />
+      <h2 className="carIntroTitle">Most Popular Car Rentals in Kosovo</h2>
+<div className="popularCompanies">
+  {popularCompanies.map((company) => (
+    <div key={company.id} className="popularCompanyCard">
+      <img src={company.photo} />
+      <p>{company.name}</p>
+    </div>
+  ))}
+</div>
+
       <div className="carResults">
         {city && companies.length > 0 && (
           <h2>Available Car Rentals in: {city}</h2>
