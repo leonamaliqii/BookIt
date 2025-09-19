@@ -1,0 +1,90 @@
+
+
+
+.vehiclesPage {
+  padding: 20px;
+  min-height:100vh;
+  width: 100%;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+  background-color: #0d153d;
+
+}
+
+.vehiclesPage h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+  font-size: 28px;
+  padding: 20px;
+  max-width: full;
+  margin: 0 auto;
+}
+
+.vehicleList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+    margin-top: 30px;
+}
+
+.vehicleCard {
+  background-color: white;
+  border: 3px solid #c6007e;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 300px;
+  padding: 10px;
+    min-height: 350px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+    
+}
+
+.vehicleImg {
+  width: 100%;         
+  height: 200px;       
+  object-fit: contain;  
+  background-color: #f0f0f0; 
+  border-radius: 5px;  
+}
+
+
+.vehicleCard h3 {
+  font-size: 18px;
+  color: #0d153d;
+  margin: 0 0 5px 0;
+}
+
+.vehicleCard p {
+  font-size: 14px;
+  color: #555;
+  margin: 2px 0;
+}
+
+.vehicleCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3); 
+}
+.bookBtn {
+  margin-top: auto; 
+  padding: 10px 15px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+  width: 100px;
+   margin: 15px auto 0 auto;
+}
+
+.bookBtn:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px);
+}

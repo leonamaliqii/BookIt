@@ -12,6 +12,7 @@
   min-height: 250px;
   position: relative; /* needed for absolute button */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  
 }
 
 /* Company image */
@@ -19,7 +20,7 @@
   flex: 1.5;          /* image takes more space */
   max-width: 350px;
   height: 220px;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 5px;
 }
 
@@ -129,4 +130,30 @@
     margin-top: 10px;
     align-self: flex-end;
   }
+
+  .csiCity {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: #555;
+}
+
+.csiIcon {
+  color: #c6007e; 
+}
+
+.csiPhone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: #0071c2; /* blue for phone */
+  margin-top: 5px;
+}
+
+.csiIcon {
+  color: #c6007e; /* your theme accent */
+}
+
 }

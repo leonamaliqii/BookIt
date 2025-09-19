@@ -6,7 +6,7 @@ import { SearchContext } from "./context/SearchContext";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import CarRentals from "./pages/carRentals/CarRentals";
-
+import CompanyVehicles from "./pages/companyVehicles/CompanyVehicles";
 
 
 
@@ -24,6 +24,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="register" element={<Register />} />
          <Route path="/rentals" element={<CarRentals />} />
+         <Route path="/rentals/:companyId" element={<CompanyVehicles />} />
 
       </Routes>
     </BrowserRouter>

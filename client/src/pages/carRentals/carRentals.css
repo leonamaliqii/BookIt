@@ -98,8 +98,8 @@ margin: 60px 0 30px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 300px;        /* bigger than 200px */
-  height: 250px;       /* set a height so the box looks bigger */
+  width: 300px;        
+  height: 250px;       
   border: 1px solid #c6007e;
   border-radius: 5px;
   overflow: hidden;
@@ -112,6 +112,6 @@ margin: 60px 0 30px 0;
 
 .popularCompanyCard img {
   width: 100%;
-  height: 200px;       /* bigger image */
+  height: 200px;       
   object-fit: cover;
 }

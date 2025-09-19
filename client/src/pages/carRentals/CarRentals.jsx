@@ -38,15 +38,20 @@ const CarRentals = () => {
     <div>
       <Navbar />
       <Header type="list" page="carRentals" />
-      <h2 className="carIntroTitle">Most Popular Car Rentals in Kosovo</h2>
-<div className="popularCompanies">
-  {popularCompanies.map((company) => (
-    <div key={company.id} className="popularCompanyCard">
-      <img src={company.photo} />
-      <p>{company.name}</p>
+     {!city && (
+  <>
+    <h2 className="carIntroTitle">Most Popular Car Rentals in Kosovo</h2>
+    <div className="popularCompanies">
+      {popularCompanies.map((company) => (
+        <div key={company.id} className="popularCompanyCard">
+          <img src={company.photo} alt={company.name} />
+          <p>{company.name}</p>
+        </div>
+      ))}
     </div>
-  ))}
-</div>
+  </>
+)}
+
 
       <div className="carResults">
         {city && companies.length > 0 && (
