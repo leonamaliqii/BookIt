@@ -114,7 +114,8 @@ const Header = ({ type, page }) => {
           </div>
         )}
 
-        {/* CAR RENTAL SEARCH */}
+       {/* CAR RENTAL SEARCH */}
+ {/* CAR RENTAL SEARCH */}
         {page === "carRentals" && (
           <div className="headerSearch">
             <div className="headerSearchItem">
@@ -128,28 +129,6 @@ const Header = ({ type, page }) => {
               />
             </div>
             <div className="headerSearchItem">
-              <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
-              <span
-                onClick={() => setOpenDate(!openDate)}
-                className="headerSearchText"
-              >
-                {`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(
-                  dates[0].endDate,
-                  "dd/MM/yyyy"
-                )}`}
-              </span>
-              {openDate && (
-                <DateRange
-                  editableDateInputs={true}
-                  onChange={item => setDates([item.selection])}
-                  moveRangeOnFirstSelection={false}
-                  ranges={dates}
-                  className="date"
-                  minDate={new Date()}
-                />
-              )}
-            </div>
-            <div className="headerSearchItem">
               <button className="headerBtn" onClick={handleSearch}>
                 Search
               </button>
@@ -159,6 +138,6 @@ const Header = ({ type, page }) => {
       </div>
     </div>
   );
-}
+};
 
 export default Header;

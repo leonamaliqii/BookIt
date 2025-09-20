@@ -7,6 +7,11 @@ import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import CarRentals from "./pages/carRentals/CarRentals";
 import CompanyVehicles from "./pages/companyVehicles/CompanyVehicles";
+import CarBooking from "./pages/carBooking/CarBooking";
+
+// inside <Routes>
+<Route path="/book/car/:vehicleId" element={<CarBooking />} />
+
 
 
 
@@ -25,6 +30,7 @@ function App() {
         <Route path="register" element={<Register />} />
          <Route path="/rentals" element={<CarRentals />} />
          <Route path="/rentals/:companyId" element={<CompanyVehicles />} />
+          <Route path="/book/car/:vehicleId" element={<CarBooking />} />
 
       </Routes>
     </BrowserRouter>

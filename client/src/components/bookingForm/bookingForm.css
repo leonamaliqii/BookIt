@@ -1,0 +1,52 @@
+.formCard {
+  background-color: #fff;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.formCard h3 {
+  color: #c6007e;
+  margin-bottom: 20px;
+}
+
+.formCard form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formCard label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.formCard input[type="date"] {
+  padding: 8px;
+  border: 1px solid #c6007e;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.bookingBtn {
+  padding: 12px;
+  background-color: #c6007e;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.bookingBtn:hover {
+  background-color: #ff007f;
+  transform: scale(1.05);
+}

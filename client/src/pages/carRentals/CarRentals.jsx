@@ -15,7 +15,7 @@ const CarRentals = () => {
   const popularCompanies = [
   { id: 1, name: "Grande Rent a Car", photo: "https://res.cloudinary.com/dicr6ysyv/image/upload/v1758291475/rent-a-car-prishtina_zmpgj0.png" },
   { id: 2, name: "U-Drive", photo: "https://res.cloudinary.com/dicr6ysyv/image/upload/v1758291475/Udrive-Rent-a-Car-Prishtina_ybjsyv.jpg" },
-  { id: 3, name: "AutoLux", photo: "https://res.cloudinary.com/dicr6ysyv/image/upload/v1758291982/renta_mlnzks.jpg" },
+  { id: 3, name: "AutoCity Rent a Car", photo: "https://res.cloudinary.com/dicr6ysyv/image/upload/v1758318464/auto_um3sy1.png" },
 ];
 
   useEffect(() => {
