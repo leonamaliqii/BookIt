@@ -34,22 +34,20 @@ const CompanyVehicles = () => {
       {vehicles.length === 0 ? (
         <p>No vehicles available</p>
       ) : (
-        <div className="vehicleList">
+       <div className="vehicleList">
           {vehicles.map((v) => (
             <div key={v.id} className="vehicleCard">
               <img
                 src={v.photo || "https://via.placeholder.com/200x120"}
                 alt={`${v.brand} ${v.model}`}
-                className="vehicleImg"
+                className="vehicleImage"
               />
               <h3>{v.brand} {v.model}</h3>
               <p>Year: {v.year}</p>
               <p>Price per day: ${v.price_per_day}</p>
-<Link to={`/book/car/${v.id}`}>
-  <button className="bookBtn">Book Now</button>
-</Link>
-
-
+              <Link to={`/book/car/${v.id}`}>
+                <button className="bookBtn">Book Now</button>
+              </Link>
             </div>
           ))}
         </div>

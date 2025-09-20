@@ -8,10 +8,8 @@ import roomsRoute from "./routes/rooms.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import vehiclesRoute from './routes/vehicles.js';
-import rentalsRoute from './routes/rentals.js';
 import companiesRouter from "./routes/companies.js";
-import bookingsRoute from "./routes/bookings.js";
-
+import carBookingRoutes from './routes/carBookings.js';
 
 
 const app = express();
@@ -46,9 +44,10 @@ app.use("/api/users", usersRoute);
 app.use("/api/hotels", hotelsRoute); 
 app.use("/api/rooms", roomsRoute);
 app.use('/api/vehicles', vehiclesRoute);
-app.use('/api/rentals', rentalsRoute);
 app.use("/api/companies", companiesRouter);
-app.use("/api/bookings", bookingsRoute);
+app.use('/api/car-bookings', carBookingRoutes);
+
+
 app.use((err,req, res, next) => {
     const errorStatus = err.status || 500;
     const errorMessage = err.message || "Something went wrong!";

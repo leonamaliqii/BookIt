@@ -42,12 +42,12 @@ const CarBooking = () => {
         </div>
 
         {/* Booking form */}
-        <BookingForm
-          itemId={vehicle._id}
-          itemType="car"
-          price={vehicle.price_per_day}
-          user={user}
-        />
+       <BookingForm
+  itemId={Number(vehicle.id)}  // or Number(vehicle._id) if SQL expects integer
+  itemType="car"
+  price={vehicle.price_per_day}
+/>
+
       </div>
     </div>
   );
