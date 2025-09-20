@@ -31,7 +31,19 @@ router.post('/', async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const result = await pool.query(
+  
+      // Check for overlapping bookings
+const overlapCheck = await pool.query(
+  `SELECT * FROM car_bookings 
+   WHERE item_id = $1 
+   AND NOT ($3 < start_date OR $2 > end_date)`,
+  [itemId, startDate, endDate]
+);
+
+if (overlapCheck.rows.length > 0) {
+  return res.status(400).json({ message: "Car is already booked for the selected dates. " });
+}
+ const result = await pool.query(
       `INSERT INTO car_bookings 
       (item_id, item_type, user_id, first_name, last_name, start_date, end_date, num_days, total_price, card_number) 
       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) 

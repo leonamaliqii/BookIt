@@ -13,11 +13,12 @@ const BookingForm = ({ itemId, itemType, price }) => {
   const [cardNumber, setCardNumber] = useState("");
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
+    setErrorMessage("");
     if (!startDate || !endDate) {
       alert("Please select both start and end dates.");
       setLoading(false);
@@ -73,11 +74,13 @@ const BookingForm = ({ itemId, itemType, price }) => {
       setCardNumber("");
       setLastName("");
     } catch (err) {
-      console.error("Booking error:", err.response?.data || err.message);
-      alert("Booking failed. Please try again.");
-    } finally {
-      setLoading(false);
-    }
+  console.error("Booking error:", err.response?.data || err.message);
+  setErrorMessage(
+    err.response?.data?.message || "Booking failed. Please try again."
+  );
+}finally{
+  setLoading(false);
+}
   };
 
   return (
@@ -136,7 +139,7 @@ const BookingForm = ({ itemId, itemType, price }) => {
             required
           />
         </label>
-
+ {errorMessage && <div className="errorMessage">{errorMessage}</div>}
         <button type="submit" className="bookingBtn" disabled={loading}>
           {loading ? "Booking..." : "Book Now"}
         </button>

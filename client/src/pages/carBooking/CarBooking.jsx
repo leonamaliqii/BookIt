@@ -43,7 +43,7 @@ const CarBooking = () => {
 
         {/* Booking form */}
        <BookingForm
-  itemId={Number(vehicle.id)}  // or Number(vehicle._id) if SQL expects integer
+  itemId={Number(vehicle.id)}  
   itemType="car"
   price={vehicle.price_per_day}
 />

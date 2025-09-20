@@ -67,9 +67,9 @@ const Header = ({ type, page }) => {
           </Link>
         </div>
 
-        <h1 className="headerTitle">Nothing beats a JET2 holiday.</h1>
-        <p className="HeaderDesc">And right now, you can say 50$ per person, thats 200$ off for a family of four.</p>
-        {!user && <button className="headerBtn">Sign in / Register</button>}
+        <h1 className="headerTitle">Welcome to Kosovo!</h1>
+        <p className="HeaderDesc">We’re here to make your visit unforgettable — top hotels, tasty restaurants, and rides that get you around with ease.</p>
+      {/*  {!user && <button className="headerBtn">Sign in / Register</button>}*/}
 
         {/* HOTEL SEARCH */}
         {page !== "carRentals" && (

@@ -31,11 +31,13 @@
   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
   width: 100%;
   text-align: center;
+  border: 3px solid darkblue;
 }
 
 .bookingForm h3 {
-  color: #c6007e;
+  color: darkblue;
   margin-bottom: 20px;
+  font-size: 25px;
 }
 
 .bookingForm label {
@@ -51,7 +53,7 @@
 .bookingForm input[type="text"],
 .bookingForm input[type="date"] {
   padding: 8px;
-  border: 1px solid #c6007e;
+  border: 1px solid darkblue;
   border-radius: 5px;
   font-size: 14px;
   margin-top: 5px;
@@ -59,7 +61,7 @@
 
 .bookingBtn {
   padding: 12px;
-  background-color: #c6007e;
+  background-color: darkblue;
   color: #fff;
   font-weight: bold;
   border: none;
@@ -71,5 +73,10 @@
 .bookingBtn:hover {
   background-color: #ff007f;
   transform: scale(1.05);
+}
+.errorMessage {
+  color: red;
+  margin-bottom: 10px;
+  font-weight: bold;
 }
 
