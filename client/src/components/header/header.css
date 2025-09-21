@@ -6,6 +6,24 @@
     justify-content: center;
     position:relative;
 }
+.header.restaurants{
+    background-color: transparent;
+    background-image: url('https://res.cloudinary.com/dicr6ysyv/image/upload/v1758489224/albanian-traditional_wqmvnc.jpg'); /* replace with your image path */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    height: 50vh; 
+}
+
+.header.carRentals {
+    background-color: transparent;
+    background-image: url('https://res.cloudinary.com/dicr6ysyv/image/upload/v1758493547/sport_vquvul.jpg'); 
+    background-size: cover;
+    background-position: center;
+    color: white;
+    height: 50vh;
+    object-fit: contain;
+}
 
 .headerContainer{
     width: 100%;

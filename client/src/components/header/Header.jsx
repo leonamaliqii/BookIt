@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import './header.css'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBed, faCalendarDays, faCar, faPlane, faTaxi, faPerson, faMapMarkerAlt,faUtensils } from '@fortawesome/free-solid-svg-icons';
+import { faBed, faCalendarDays, faCar, faTaxi, faMapMarkerAlt, faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -10,7 +10,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { SearchContext } from "../../context/SearchContext"; 
 import { AuthContext } from '../../context/AuthContext';
 
-const Header = ({ type, page }) => {
+const Header = ({ page }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([{ startDate: new Date(), endDate: new Date(), key: 'selection' }]);
@@ -33,9 +33,30 @@ const Header = ({ type, page }) => {
     }
   }
 
+  // Dynamic titles & descriptions
+  let headerTitle = "";
+  let headerDesc = "";
+
+  if (page === "hotels") {
+    headerTitle = "Find the Best Hotels in Kosovo!";
+    headerDesc = "Book top-rated hotels and enjoy your stay in comfort and style.";
+  } else if (page === "carRentals") {
+    headerTitle = "Explore Kosovo with ease!";
+    headerDesc = "Pick the perfect car and drive anywhere with ease.";
+  } else if (page === "restaurants") {
+    headerTitle = "Discover the Best Restaurants!";
+    headerDesc = "Savor delicious meals at the top dining spots in Kosovo.";
+  } else {
+    headerTitle = "Welcome to Kosovo!";
+    headerDesc = "We’re here to make your visit unforgettable — top hotels, tasty restaurants, and rides that get you around with ease.";
+  }
+
   return (
-    <div className="header">
+    <div className={`header 
+                    ${page === "restaurants" ? "restaurants" : ""} 
+                    ${page === "carRentals" ? "carRentals" : ""}`}>
       <div className="headerContainer">
+        {/* Navigation links */}
         <div className="headerList">
           <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
             <div className={`headerListItem ${location.pathname === "/" ? "active" : ""}`}>
@@ -69,12 +90,12 @@ const Header = ({ type, page }) => {
           </Link>
         </div>
 
-        <h1 className="headerTitle">Welcome to Kosovo!</h1>
-        <p className="HeaderDesc">We’re here to make your visit unforgettable — top hotels, tasty restaurants, and rides that get you around with ease.</p>
-      {/*  {!user && <button className="headerBtn">Sign in / Register</button>}*/}
+        {/* Dynamic title & description */}
+        <h1 className="headerTitle">{headerTitle}</h1>
+        <p className="HeaderDesc">{headerDesc}</p>
 
         {/* HOTEL SEARCH */}
-        {page !== "carRentals" && (
+        {page !== "carRentals" && page !== "restaurants" && (
           <div className="headerSearch">
             <div className="headerSearchItem">
               <FontAwesomeIcon icon={faBed} className="headerIcon" />
@@ -116,8 +137,7 @@ const Header = ({ type, page }) => {
           </div>
         )}
 
-       {/* CAR RENTAL SEARCH */}
- {/* CAR RENTAL SEARCH */}
+        {/* CAR RENTAL SEARCH */}
         {page === "carRentals" && (
           <div className="headerSearch">
             <div className="headerSearchItem">
@@ -137,11 +157,9 @@ const Header = ({ type, page }) => {
             </div>
           </div>
         )}
-  
 
-
- {/* RESTAURANT SEARCH */}
-        {page === "restaurants" && ( 
+        {/* RESTAURANT SEARCH */}
+        {page === "restaurants" && (
           <div className="headerSearch">
             <div className="headerSearchItem">
               <FontAwesomeIcon icon={faUtensils} className="headerIcon" /> 
@@ -163,6 +181,5 @@ const Header = ({ type, page }) => {
     </div>
   );
 };
-
 
 export default Header;

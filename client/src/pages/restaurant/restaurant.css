@@ -1,0 +1,90 @@
+/* Header for the restaurant page */
+
+
+.restaurantHeader h1 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.restaurantHeader p {
+  font-size: 16px;
+  margin-bottom: 0px;
+}
+
+.restaurantCards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+
+
+
+.restaurantCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  border: 1px solid #c6007e;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s;
+  font-weight: bold;
+  color: #0d153d;
+}
+
+.restaurantCard:hover {
+  transform: scale(1.05);
+}
+
+
+.restaurantCard img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+
+.restaurantCard h2 {
+  margin: 10px 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+
+.restaurantStars {
+  color: gold;
+  margin: 5px 0;
+}
+
+
+.restaurantCard p {
+  text-align: center;
+  margin: 10px;
+  font-size: 14px;
+  color: #333;
+}
+
+.restaurantDesignSection {
+  text-align: center;       
+  margin: 40px 0;           
+  display: flex;
+  flex-direction: column;   
+  justify-content: center;
+  align-items: center;      
+}
+
+.restaurantDesignSection h1 {
+  font-size: 28px;
+  color: #0d153d;
+  margin-bottom: 10px;
+}
+
+.restaurantDesignSection p {
+  font-size: 16px;
+  color: #555;
+}
