@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import './header.css'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBed, faCalendarDays, faCar, faPlane, faTaxi, faPerson, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBed, faCalendarDays, faCar, faPlane, faTaxi, faPerson, faMapMarkerAlt,faUtensils } from '@fortawesome/free-solid-svg-icons';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -25,6 +25,8 @@ const Header = ({ type, page }) => {
   const handleSearch = () => {
     if(page === "carRentals"){
       navigate("/rentals", { state: { city, dates } });
+    } else if (page === "restaurants"){
+       navigate("/restaurants", { state: { city } });
     } else {
       dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
       navigate("/hotels", { state: { destination, dates, options } });
@@ -47,10 +49,10 @@ const Header = ({ type, page }) => {
               <span>Car Rentals</span>
             </div>
           </Link>
-          <Link to="/flights" style={{ textDecoration: "none", color: "inherit" }}>
-            <div className={`headerListItem ${location.pathname === "/flights" ? "active" : ""}`}>
-              <FontAwesomeIcon icon={faPlane} />
-              <span>Flights</span>
+          <Link to="/restaurants" style={{ textDecoration: "none", color: "inherit" }}>
+            <div className={`headerListItem ${location.pathname === "/restaurants" ? "active" : ""}`}>
+              <FontAwesomeIcon icon={faUtensils} />
+              <span>Restaurants</span>
             </div>
           </Link>
           <Link to="/attractions" style={{ textDecoration: "none", color: "inherit" }}>
@@ -135,9 +137,32 @@ const Header = ({ type, page }) => {
             </div>
           </div>
         )}
+  
+
+
+ {/* RESTAURANT SEARCH */}
+        {page === "restaurants" && ( 
+          <div className="headerSearch">
+            <div className="headerSearchItem">
+              <FontAwesomeIcon icon={faUtensils} className="headerIcon" /> 
+              <input
+                type="text"
+                placeholder="Where to eat?" 
+                className="headerSearchInput"
+                value={city}
+                onChange={e => setCity(e.target.value)} 
+              />
+            </div>
+            <div className="headerSearchItem">
+              <button className="headerBtn" onClick={handleSearch}>Search</button>
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
 };
+
 
 export default Header;

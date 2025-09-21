@@ -9,7 +9,7 @@ import CarRentals from "./pages/carRentals/CarRentals";
 import CompanyVehicles from "./pages/companyVehicles/CompanyVehicles";
 import CarBooking from "./pages/carBooking/CarBooking";
 import HotelBooking from "./pages/hotelBooking/HotelBooking";
-
+import Restaurant from "./pages/restaurant/Restaurant.jsx";
 
 // inside <Routes>
 function App() {
@@ -25,7 +25,7 @@ function App() {
          <Route path="/rentals/:companyId" element={<CompanyVehicles />} />
           <Route path="/book/car/:vehicleId" element={<CarBooking />} />
         <Route path="/hotel-booking" element={<HotelBooking />} />
-
+    <Route path="/restaurants" element={<Restaurant />} />
       </Routes>
     </BrowserRouter>
   );
