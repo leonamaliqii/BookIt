@@ -8,17 +8,10 @@ import Register from "./pages/register/Register";
 import CarRentals from "./pages/carRentals/CarRentals";
 import CompanyVehicles from "./pages/companyVehicles/CompanyVehicles";
 import CarBooking from "./pages/carBooking/CarBooking";
+import HotelBooking from "./pages/hotelBooking/HotelBooking";
+
 
 // inside <Routes>
-<Route path="/book/car/:vehicleId" element={<CarBooking />} />
-
-
-
-
-
-
-
-
 function App() {
   return (
     <BrowserRouter>
@@ -31,6 +24,7 @@ function App() {
          <Route path="/rentals" element={<CarRentals />} />
          <Route path="/rentals/:companyId" element={<CompanyVehicles />} />
           <Route path="/book/car/:vehicleId" element={<CarBooking />} />
+        <Route path="/hotel-booking" element={<HotelBooking />} />
 
       </Routes>
     </BrowserRouter>
@@ -39,28 +33,4 @@ function App() {
 
 export default App;
 
-/*import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;*/

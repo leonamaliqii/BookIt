@@ -10,7 +10,7 @@ import cors from "cors";
 import vehiclesRoute from './routes/vehicles.js';
 import companiesRouter from "./routes/companies.js";
 import carBookingRoutes from './routes/carBookings.js';
-
+import hotelBookingsRoute from "./routes/hotelBookings.js";
 
 const app = express();
 dotenv.config();
@@ -46,7 +46,7 @@ app.use("/api/rooms", roomsRoute);
 app.use('/api/vehicles', vehiclesRoute);
 app.use("/api/companies", companiesRouter);
 app.use('/api/car-bookings', carBookingRoutes);
-
+app.use("/api/hotel-bookings", hotelBookingsRoute);
 
 app.use((err,req, res, next) => {
     const errorStatus = err.status || 500;

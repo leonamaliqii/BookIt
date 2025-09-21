@@ -54,26 +54,26 @@ const Reserve = ({ setOpen, hotelId }) => {
   }, [selectedRooms]);
 
   const navigate = useNavigate();
-  const handleClick = async () => {
-    try {
-      await Promise.all(
-        selectedRooms.map(async (roomId) => {
-          const res = await axios.put(
-            `http://localhost:8800/api/rooms/availability/${roomId}`,
-            { dates: alldates }
-          );
-          return res.data;
-        })
-      );
+const handleClick = () => {
+  // calculate total price for selected rooms
+const totalPrice = selectedRooms.reduce((sum, roomId) => {
+  const room = data.find(item => item.roomNumbers.some(r => r._id === roomId));
+  return sum + (room?.price || 0) * alldates.length; 
+}, 0);
 
-      alert("Rooms reserved successfully!");
-      setOpen(false);
-      navigate("/");
-    } catch (err) {
-      console.error(err);
-      alert("Something went wrong. Please try again.");
-    }
-  };
+navigate("/hotel-booking", {
+  state: {
+    hotelId,
+    hotelName: data[0]?.title, // add hotel name for display
+    selectedRooms,
+    startDate: dates[0].startDate,
+    endDate: dates[0].endDate,
+    totalPrice,
+  },
+});
+
+};
+
 
   return (
     <div className="reserve">

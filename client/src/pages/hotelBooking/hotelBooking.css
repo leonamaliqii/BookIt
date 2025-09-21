@@ -1,0 +1,98 @@
+/* hotelBooking.css */
+.hotelBookingPage {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #9ea0a8, #8179bd);
+}
+
+.hotelBookingWrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 30px auto;
+  
+}
+
+.successMessage {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 12px 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: center;
+  font-weight: bold;
+  animation: fadeInOut 5s forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.hotelBookingForm {
+  background-color: #fff;
+  padding: 30px 25px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  width: 100%;
+  text-align: center;
+  border: 3px solid darkblue;
+}
+
+.hotelBookingForm h3 {
+  color: darkblue;
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+.hotelBookingForm label {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.hotelBookingForm input[type="text"],
+.hotelBookingForm input[type="number"],
+.hotelBookingForm input[type="tel"] {
+  padding: 8px;
+  border: 1px solid darkblue;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.hotelBookingForm p {
+  font-weight: bold;
+  margin: 15px 0;
+  color: #333;
+}
+
+.hotelBookingForm button {
+  padding: 12px;
+  background-color: darkblue;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.hotelBookingForm button:hover {
+  background-color: #ff007f;
+  transform: scale(1.05);
+}
+
+.errorMessage {
+  color: red;
+  margin-bottom: 10px;
+  font-weight: bold;
+}

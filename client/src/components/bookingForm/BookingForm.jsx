@@ -65,7 +65,7 @@ const BookingForm = ({ itemId, itemType, price }) => {
       console.log("Booking saved:", res.data);
 
       // show success message
-      setSuccessMessage(`✅ Booking successful! Total: $${totalPrice}`);
+      setSuccessMessage(`Booking successful! Total: $${totalPrice}`);
       setTimeout(() => setSuccessMessage(""), 5000);
 
       // reset form
