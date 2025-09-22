@@ -49,12 +49,12 @@ const Restaurant = () => {
 
             {/* Static Card 2 */}
             <div className="restaurantCard">
-              <img src="https://res.cloudinary.com/dicr6ysyv/image/upload/v1758488254/bukezemer_iczckf.jpg" alt="BUKË E ZEMËR" />
-              <h2>BUKË E ZEMËR</h2>
+              <img src="https://res.cloudinary.com/dicr6ysyv/image/upload/v1758554175/maden-group-noya-bars-archello.1704579257.0973_fezqvb.jpg" alt="NOYA" />
+              <h2>NOYA</h2>
               <div className="restaurantStars">
                 <FontAwesomeIcon icon={faStar} /><FontAwesomeIcon icon={faStar} /><FontAwesomeIcon icon={faStar} /><FontAwesomeIcon icon={faStar} />
               </div>
-              <p>A family run restaurant aims at making everyone feel at home by serving the most delicious traditional dishes.</p>
+              <p>Noya goes beyond a mere restaurant. Its your haven for Asian excellence.</p>
             </div>
 
             {/* Static Card 3 */}

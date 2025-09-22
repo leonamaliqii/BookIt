@@ -10,6 +10,7 @@ import CompanyVehicles from "./pages/companyVehicles/CompanyVehicles";
 import CarBooking from "./pages/carBooking/CarBooking";
 import HotelBooking from "./pages/hotelBooking/HotelBooking";
 import Restaurant from "./pages/restaurant/Restaurant.jsx";
+import RestaurantDetail from "./pages/restaurantDetail/RestaurantDetail";
 
 // inside <Routes>
 function App() {
@@ -26,6 +27,8 @@ function App() {
           <Route path="/book/car/:vehicleId" element={<CarBooking />} />
         <Route path="/hotel-booking" element={<HotelBooking />} />
     <Route path="/restaurants" element={<Restaurant />} />
+    <Route path="/restaurants/:id" element={<RestaurantDetail />} />
+
       </Routes>
     </BrowserRouter>
   );

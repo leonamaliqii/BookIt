@@ -3,8 +3,15 @@ import "./restaurantSearchItem.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const RestaurantSearchItem = ({ restaurant }) => {
+  const navigate = useNavigate();
+
+  const handleSeeAvailability = () => {
+    navigate(`/restaurants/${restaurant.id}`);
+  };
+
   return (
     <div className="restaurantSearchItem">
       <img
@@ -26,9 +33,9 @@ const RestaurantSearchItem = ({ restaurant }) => {
         {restaurant.description && <p className="rsiDescText">{restaurant.description}</p>}
       </div>
       <div className="rsiAction">
-        <Link to={`/restaurants/${restaurant.id}`}>
-          <button className="rsiBtn">See Availability</button>
-        </Link>
+        
+          <button className="rsiBtn" onClick={handleSeeAvailability}>See Availability</button>
+        
       </div>
     </div>
   );

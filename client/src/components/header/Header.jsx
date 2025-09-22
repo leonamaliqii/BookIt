@@ -25,7 +25,7 @@ const Header = ({ page, city, setCity, onSearch }) => {
     if (page === "carRentals") {
       navigate("/rentals", { state: { city, dates } });
     } else if (page === "restaurants") {
-      if (onSearch) onSearch(); // call parent function
+      if (onSearch) onSearch(); 
     } else {
       dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
       navigate("/hotels", { state: { destination, dates, options } });
