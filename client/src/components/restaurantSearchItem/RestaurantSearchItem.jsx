@@ -2,7 +2,6 @@ import React from "react";
 import "./restaurantSearchItem.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 const RestaurantSearchItem = ({ restaurant }) => {
@@ -14,11 +13,13 @@ const RestaurantSearchItem = ({ restaurant }) => {
 
   return (
     <div className="restaurantSearchItem">
+      {/* Display first photo from JSONB array, fallback to placeholder */}
       <img
-        src={restaurant.photos?.[0] || "https://via.placeholder.com/200"}
+        src={restaurant.photos?.[0]?.url || "https://via.placeholder.com/200"}
         alt={restaurant.name}
         className="rsiImg"
       />
+
       <div className="rsiDesc">
         <h1 className="rsiTitle">{restaurant.name}</h1>
         <span className="rsiCity">
@@ -30,12 +31,15 @@ const RestaurantSearchItem = ({ restaurant }) => {
             <FontAwesomeIcon icon={faPhone} /> {restaurant.phone}
           </span>
         )}
-        {restaurant.description && <p className="rsiDescText">{restaurant.description}</p>}
+        {restaurant.description && (
+          <p className="rsiDescText">{restaurant.description}</p>
+        )}
       </div>
+
       <div className="rsiAction">
-        
-          <button className="rsiBtn" onClick={handleSeeAvailability}>See Availability</button>
-        
+        <button className="rsiBtn" onClick={handleSeeAvailability}>
+          See Availability
+        </button>
       </div>
     </div>
   );
