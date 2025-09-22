@@ -10,12 +10,11 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { SearchContext } from "../../context/SearchContext"; 
 import { AuthContext } from '../../context/AuthContext';
 
-const Header = ({ page }) => {
+const Header = ({ page, city, setCity, onSearch }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([{ startDate: new Date(), endDate: new Date(), key: 'selection' }]);
   const [options, setOptions] = useState({ adult: 1, children: 0, room: 1 });
-  const [city, setCity] = useState("");
 
   const { user } = useContext(AuthContext);
   const { dispatch } = useContext(SearchContext);
@@ -23,15 +22,15 @@ const Header = ({ page }) => {
   const location = useLocation();
 
   const handleSearch = () => {
-    if(page === "carRentals"){
+    if (page === "carRentals") {
       navigate("/rentals", { state: { city, dates } });
-    } else if (page === "restaurants"){
-       navigate("/restaurants", { state: { city } });
+    } else if (page === "restaurants") {
+      if (onSearch) onSearch(); // call parent function
     } else {
       dispatch({ type: "NEW_SEARCH", payload: { destination, dates, options } });
       navigate("/hotels", { state: { destination, dates, options } });
     }
-  }
+  };
 
   // Dynamic titles & descriptions
   let headerTitle = "";
@@ -52,9 +51,7 @@ const Header = ({ page }) => {
   }
 
   return (
-    <div className={`header 
-                    ${page === "restaurants" ? "restaurants" : ""} 
-                    ${page === "carRentals" ? "carRentals" : ""}`}>
+    <div className={`header ${page === "restaurants" ? "restaurants" : ""} ${page === "carRentals" ? "carRentals" : ""}`}>
       <div className="headerContainer">
         {/* Navigation links */}
         <div className="headerList">
@@ -109,14 +106,8 @@ const Header = ({ page }) => {
             </div>
             <div className="headerSearchItem">
               <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
-              <span
-                onClick={() => setOpenDate(!openDate)}
-                className="headerSearchText"
-              >
-                {`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(
-                  dates[0].endDate,
-                  "dd/MM/yyyy"
-                )}`}
+              <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">
+                {`${format(dates[0].startDate, "dd/MM/yyyy")} to ${format(dates[0].endDate, "dd/MM/yyyy")}`}
               </span>
               {openDate && (
                 <DateRange
@@ -130,9 +121,7 @@ const Header = ({ page }) => {
               )}
             </div>
             <div className="headerSearchItem">
-              <button className="headerBtn" onClick={handleSearch}>
-                Search
-              </button>
+              <button className="headerBtn" onClick={handleSearch}>Search</button>
             </div>
           </div>
         )}
@@ -151,9 +140,7 @@ const Header = ({ page }) => {
               />
             </div>
             <div className="headerSearchItem">
-              <button className="headerBtn" onClick={handleSearch}>
-                Search
-              </button>
+              <button className="headerBtn" onClick={handleSearch}>Search</button>
             </div>
           </div>
         )}
@@ -165,10 +152,10 @@ const Header = ({ page }) => {
               <FontAwesomeIcon icon={faUtensils} className="headerIcon" /> 
               <input
                 type="text"
-                placeholder="Where to eat?" 
+                placeholder="Where to eat?"
                 className="headerSearchInput"
                 value={city}
-                onChange={e => setCity(e.target.value)} 
+                onChange={e => setCity(e.target.value)}
               />
             </div>
             <div className="headerSearchItem">
@@ -176,7 +163,6 @@ const Header = ({ page }) => {
             </div>
           </div>
         )}
-
       </div>
     </div>
   );
