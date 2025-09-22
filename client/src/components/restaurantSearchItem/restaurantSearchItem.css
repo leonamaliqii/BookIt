@@ -1,0 +1,128 @@
+/* Container for each restaurant card */
+.restaurantSearchItem {
+  display: flex;
+  gap: 20px;
+  max-width: 1000px;
+  width: 60%;
+  margin: 0 auto 20px auto;
+  padding: 20px;
+  border: 1px solid #c6007e;
+  border-radius: 5px;
+  background-color: white;
+  min-height: 250px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.restaurantsResults {
+  margin-top: 60px; 
+}
+
+/* Restaurant image */
+.rsiImg {
+  flex: 1.5;
+  max-width: 350px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Description section */
+.rsiDesc {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Restaurant name */
+.rsiTitle {
+  font-size: 22px;
+  color: #0d153d;
+  margin: 0;
+}
+
+/* City */
+.rsiCity {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+}
+
+/* Address */
+.rsiAddress {
+  font-size: 13px;
+  color: #777;
+}
+
+/* Phone */
+.rsiPhone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  color: #0071c2;
+  margin-top: 5px;
+}
+
+/* Description text */
+.rsiDescText {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #333;
+}
+
+/* Action section */
+.rsiAction {
+  flex: 1;
+  position: relative;
+}
+
+/* See availability button */
+.rsiBtn {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: #0071c2;
+  color: white;
+  font-weight: bold;
+  padding: 12px 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Hover effect for card */
+.restaurantSearchItem:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .restaurantSearchItem {
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
+  }
+
+  .rsiImg {
+    width: 90%;
+    height: auto;
+  }
+
+  .rsiAction {
+    width: 100%;
+  }
+
+  .rsiBtn {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: 10px;
+    align-self: flex-end;
+  }
+}
