@@ -38,13 +38,19 @@ const RestaurantDetail = () => {
     setSlideNumber(newSlideNumber);
   };
 
-  const handleReservation = () => {
-    if (user) {
-      navigate(`/restaurant-reserve/${id}`);
-    } else {
-      navigate("/login");
-    }
-  };
+const handleReservation = () => {
+  if (user) {
+    navigate("/restaurant-booking", { 
+      state: { 
+        restaurantId: id, 
+        restaurantName: data.name  // pass the name too
+      } 
+    });
+  } else {
+    navigate("/login");
+  }
+};
+
 
   return (
     <div>

@@ -12,6 +12,8 @@ import companiesRouter from "./routes/companies.js";
 import carBookingRoutes from './routes/carBookings.js';
 import hotelBookingsRoute from "./routes/hotelBookings.js";
 import restaurantsRouter from "./routes/restaurants.js";
+import restaurantReservationsRoutes from "./routes/restaurantBooking.js";
+
 const app = express();
 dotenv.config();
 
@@ -48,6 +50,8 @@ app.use("/api/companies", companiesRouter);
 app.use('/api/car-bookings', carBookingRoutes);
 app.use("/api/hotel-bookings", hotelBookingsRoute);
 app.use("/api/restaurants", restaurantsRouter);
+app.use("/api/restaurant-reservations", restaurantReservationsRoutes);
+
 app.use((err,req, res, next) => {
     const errorStatus = err.status || 500;
     const errorMessage = err.message || "Something went wrong!";
