@@ -1,9 +1,8 @@
 import "./login.css";
-import { useContext, useState, useEffect, use } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -11,9 +10,13 @@ const Login = () => {
     password: "",
   });
 
-  const {  loading, error, dispatch } = useContext(AuthContext);
+  const { loading, error, dispatch } = useContext(AuthContext);
 
-  const navigate =  useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the page the user came from, default to home
+  const from = location.state?.from || "/";
 
   const handleChange = (e) => {
     setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -29,7 +32,9 @@ const Login = () => {
       );
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
       console.log("Logged in user:", res.data);
-        navigate("/");
+
+      // Navigate to the page the user was trying to access
+      navigate(from, { replace: true });
     } catch (err) {
       console.log("Error response:", err.response?.data);
       dispatch({
@@ -94,8 +99,8 @@ const Login = () => {
         )}
 
         <p className="register">
-  Don’t have an account? <Link to="/register">Register</Link>
-</p>
+          Don’t have an account? <Link to="/register">Register</Link>
+        </p>
       </div>
     </div>
   );
