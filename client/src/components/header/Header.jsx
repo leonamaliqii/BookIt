@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import './header.css'; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBed, faCalendarDays, faCar, faTaxi, faMapMarkerAlt, faUtensils, faLandmark } from '@fortawesome/free-solid-svg-icons';
+import { faBed, faCalendarDays, faCar, faMapMarkerAlt, faUtensils, faLandmark } from '@fortawesome/free-solid-svg-icons';
 import { DateRange } from 'react-date-range';
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
@@ -10,13 +10,14 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { SearchContext } from "../../context/SearchContext"; 
 import { AuthContext } from '../../context/AuthContext';
 
-
-
 const Header = ({ page, city, setCity, onSearch, showSearch = true, heroImage }) => {
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([{ startDate: new Date(), endDate: new Date(), key: 'selection' }]);
   const [options, setOptions] = useState({ adult: 1, children: 0, room: 1 });
+
+  
+  const [rentalCity, setRentalCity] = useState("");
 
   const { dispatch } = useContext(SearchContext);
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Header = ({ page, city, setCity, onSearch, showSearch = true, heroImage })
 
   const handleSearch = () => {
     if (page === "carRentals") {
-      navigate("/rentals", { state: { city, dates } });
+      navigate("/rentals", { state: { city: rentalCity, dates } });
     } else if (page === "restaurants" && onSearch) {
       onSearch();
     } else {
@@ -116,7 +117,15 @@ const Header = ({ page, city, setCity, onSearch, showSearch = true, heroImage })
                   <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">
                     {`${format(dates[0].startDate,"dd/MM/yyyy")} to ${format(dates[0].endDate,"dd/MM/yyyy")}`}
                   </span>
-                  {openDate && <DateRange editableDateInputs={true} onChange={item => setDates([item.selection])} ranges={dates} className="date" minDate={new Date()} />}
+                  {openDate && (
+                    <DateRange 
+                      editableDateInputs={true} 
+                      onChange={item => setDates([item.selection])} 
+                      ranges={dates} 
+                      className="date" 
+                      minDate={new Date()} 
+                    />
+                  )}
                 </div>
                 <div className="headerSearchItem">
                   <button className="headerBtn" onClick={handleSearch}>Search</button>
@@ -130,8 +139,8 @@ const Header = ({ page, city, setCity, onSearch, showSearch = true, heroImage })
                 <input 
                   type="text" 
                   placeholder="Search by city" 
-                  value={city} 
-                  onChange={e => setCity(e.target.value)} 
+                  value={rentalCity} 
+                  onChange={e => setRentalCity(e.target.value)} 
                   className="headerSearchInput"
                 />
                 <button className="headerBtn" onClick={handleSearch}>Search</button>

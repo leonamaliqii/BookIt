@@ -60,9 +60,12 @@
 
 .hotelImg {
   width: 100%;
-  object-fit: cover;
+  height: 200px;       
+  object-fit: cover;   
   cursor: pointer;
+  border-radius: 5px;  
 }
+
 
 .hotelDetails {
   display: flex;
