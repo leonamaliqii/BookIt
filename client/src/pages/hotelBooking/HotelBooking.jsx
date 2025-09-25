@@ -26,10 +26,19 @@ const HotelBooking = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Step 1: Check if user is logged in
+    if (!user) {
+      setTimeout(() => navigate("/login"), 2500); 
+      return;
+    }
+
+    // Step 2: Validate form fields
     if (!fullName || !cardNumber || !phone) {
       setErrorMessage("Please fill in all fields.");
       return;
     }
+
     if (!hotelId || !selectedRooms || selectedRooms.length === 0) {
       setErrorMessage("No rooms selected.");
       return;
@@ -44,18 +53,18 @@ const HotelBooking = () => {
       startDate,
       endDate,
       totalPrice,
-      userId: user?._id || "guest",
+      userId: user._id,
       firstName: fullName.split(" ")[0] || fullName,
       lastName: fullName.split(" ")[1] || "",
     };
 
     try {
-      const res = await axios.post("http://localhost:8800/api/hotel-bookings", payload);
+      await axios.post("http://localhost:8800/api/hotel-bookings", payload);
       setSuccessMessage(`Booking successful! Total: $${totalPrice}`);
       setFullName("");
       setCardNumber("");
       setPhone("");
-      setTimeout(() => navigate("/"), 4000); 
+      setTimeout(() => navigate("/"), 4000);
     } catch (err) {
       console.error(err.response || err);
       setErrorMessage(err.response?.data?.error || "Booking failed. Please try again.");
@@ -74,15 +83,32 @@ const HotelBooking = () => {
           <h3>Book Your Hotel</h3>
           <label>
             Full Name:
-            <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} required />
+            <input
+              type="text"
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              required
+            />
           </label>
           <label>
             Card Number:
-            <input type="text" value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="1234 5678 9012 3456" required />
+            <input
+              type="text"
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
+              placeholder="1234 5678 9012 3456"
+              required
+            />
           </label>
           <label>
             Phone Number:
-            <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+383 44 123 456" required />
+            <input
+              type="text"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="+383 44 123 456"
+              required
+            />
           </label>
           <p>Total Price: ${totalPrice}</p>
           <button type="submit" disabled={loading}>
