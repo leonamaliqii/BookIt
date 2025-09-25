@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 import "./attractions.css";
 
 const Attractions = () => {
@@ -193,26 +194,13 @@ const Attractions = () => {
     Bogë Ski Center is a charming resort nestled in the Rugova Mountains, offering 3 km of slopes suitable for beginners and intermediate skiers. The area is renowned for its serene atmosphere and breathtaking alpine views.
   </p>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        </div>
+    </div>
       </div>
+
+      <Footer />
     </div>
   );
 };
 
 export default Attractions;
+

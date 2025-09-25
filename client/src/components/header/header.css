@@ -74,15 +74,23 @@
     margin:20px 0px;
 }
 
-.headerBtn{
-    background-color:#c6007e; 
-    color:white;
-    font-weight: 500;
-    border:none;
-    padding:10px;
-    cursor:pointer;
-    
+.headerBtn {
+  background-color: #c6007e;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
 }
+
+.headerBtn:hover {
+  background-color: #a20066;
+  transform: translateY(-1px);
+}
+
 
 .headerSearch{
     height: 30px;
