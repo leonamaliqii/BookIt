@@ -1,28 +1,27 @@
+
+
 import "./datatable.scss";
 import { DataGrid } from "@mui/x-data-grid";
-import { userColumns } from "../../datatablesource";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useLocation } from "react-router-dom";
-import { hotelColumns } from "../../datatablesource";
 
-const Datatable = ({columns}) => {
+const Datatable = ({ columns }) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
-  const [list, setList] = useState();
+  const [list, setList] = useState([]);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  /*const {data, loading, error} = useFetch("/$${path}")*/
 
-   useEffect(() => {
+  const token = localStorage.getItem("token");
+
+  // Sync data with list
+  useEffect(() => {
     setList(data);
   }, [data]);
 
-  // Get token from localStorage
-  const token = localStorage.getItem("token");
-
+  // Fetch data from API
   useEffect(() => {
     const fetchData = async () => {
       if (!token) {
@@ -33,9 +32,7 @@ const Datatable = ({columns}) => {
       setLoading(true);
       try {
         const res = await axios.get(`http://localhost:8800/api/${path}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+          headers: { Authorization: `Bearer ${token}` },
         });
         setData(res.data);
         setError(null);
@@ -49,47 +46,52 @@ const Datatable = ({columns}) => {
     fetchData();
   }, [token, path]);
 
-const handleDelete = async (id, hotelId) => {
-  try {
-    let url = `http://localhost:8800/api/${path}/${id}`;
-    if (path === "rooms") url += `/${hotelId}`; // rooms need hotelId
+  // Handle delete
+  const handleDelete = async (id, hotelId) => {
+    try {
+      let url = `http://localhost:8800/api/${path}/${id}`;
+      if (path === "rooms") url += `/${hotelId}`;
 
-    await axios.delete(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+      await axios.delete(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    setList(list.filter((item) => item._id || item.id ? (item._id || item.id) !== id : true));
-  } catch (err) {
-    console.error("Delete failed:", err.response?.data || err.message);
-  }
-};
+      // Update list after deletion
+      setList(list.filter((item) => {
+        const itemId = item._id || item.id; // works for both _id (Mongo) and id (PostgreSQL)
+        return itemId !== id;
+      }));
+    } catch (err) {
+      console.error("Delete failed:", err.response?.data || err.message);
+    }
+  };
 
-
-
+  // Action column
   const actionColumn = [
     {
       field: "action",
       headerName: "Action",
       width: 200,
-      renderCell: (params) => (
-        <div className="cellAction">
-          <Link to={`/users/${params.row._id}`} style={{ textDecoration: "none" }}>
-            <div className="viewButton">View</div>
-          </Link>
-          <div
-  className="deleteButton"
-  onClick={() =>
-  path === "rooms"
-    ? handleDelete(params.row._id || params.row.id, params.row.hotelId)
-    : handleDelete(params.row._id || params.row.id)
-}
-
->
-  Delete
-</div>
-
-        </div>
-      ),
+      renderCell: (params) => {
+        const itemId = params.row._id || params.row.id;
+        return (
+          <div className="cellAction">
+            <Link to={`/${path}/${itemId}`} style={{ textDecoration: "none" }}>
+              <div className="viewButton">View</div>
+            </Link>
+            <div
+              className="deleteButton"
+              onClick={() =>
+                path === "rooms"
+                  ? handleDelete(itemId, params.row.hotelId)
+                  : handleDelete(itemId)
+              }
+            >
+              Delete
+            </div>
+          </div>
+        );
+      },
     },
   ];
 
@@ -114,7 +116,7 @@ const handleDelete = async (id, hotelId) => {
           pageSize={9}
           rowsPerPageOptions={[9]}
           checkboxSelection
-          getRowId={(row) => row._id || row.id}
+          getRowId={(row) => row._id || row.id} // works for Mongo (_id) and PostgreSQL (id)
         />
       )}
     </div>

@@ -15,7 +15,8 @@ import {
   userColumns, 
   hotelColumns, 
   vehicleColumns, 
-  restaurantColumns 
+  restaurantColumns,  // <-- comma added
+  companyColumns
 } from "./datatablesource";
 
 import { AuthContext } from "./context/AuthContext";
@@ -149,6 +150,18 @@ function App() {
               element={
                 <ProtectedRoute>
                   <List columns={restaurantColumns} />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+
+          {/* Companies */}
+          <Route path="companies">
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <List columns={companyColumns} />
                 </ProtectedRoute>
               }
             />

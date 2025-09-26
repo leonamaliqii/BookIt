@@ -101,3 +101,13 @@ export const restaurantColumns = [
   { field: "type", headerName: "Type", width: 150 },
   { field: "rating", headerName: "Rating", width: 100 },
 ];
+
+export const companyColumns = [
+  { field: "id", headerName: "ID", width: 70 },
+  { field: "name", headerName: "Company Name", width: 200 },
+  { field: "city", headerName: "City", width: 120 },
+  { field: "phone", headerName: "Phone", width: 150 },
+  { field: "address", headerName: "Address", width: 250 },
+  { field: "description", headerName: "Description", width: 250 },
+];
+

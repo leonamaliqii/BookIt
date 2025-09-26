@@ -99,4 +99,17 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// DELETE /api/companies/:id
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    await pool.query("DELETE FROM companies WHERE id = $1", [id]);
+    res.json({ message: "Company deleted successfully" });
+  } catch (err) {
+    console.error("DELETE /api/companies error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 export default router;
