@@ -60,7 +60,7 @@ const handleDelete = async (id, hotelId) => {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    setList(list.filter((item) => item._id !== id));
+    setList(list.filter((item) => (item._id || item.id) !== id));
   } catch (err) {
     console.error("Delete failed:", err.response?.data || err.message);
   }
@@ -81,10 +81,11 @@ const handleDelete = async (id, hotelId) => {
           <div
   className="deleteButton"
   onClick={() =>
-    path === "rooms"
-      ? handleDelete(params.row._id, params.row.hotelId) // rooms need hotelId
-      : handleDelete(params.row._id) // users & hotels only need id
-  }
+  path === "rooms"
+    ? handleDelete(params.row._id || params.row.id, params.row.hotelId)
+    : handleDelete(params.row._id || params.row.id)
+}
+
 >
   Delete
 </div>
@@ -106,7 +107,7 @@ const handleDelete = async (id, hotelId) => {
       {error && <div style={{ color: "red", marginBottom: "10px" }}>{error.message}</div>}
 
       {loading ? (
-        <div>Loading users...</div>
+        <div>Loading ...</div>
       ) : (
         <DataGrid
           className="datagrid"
@@ -115,7 +116,7 @@ const handleDelete = async (id, hotelId) => {
           pageSize={9}
           rowsPerPageOptions={[9]}
           checkboxSelection
-          getRowId={(row) => row._id}
+          getRowId={(row) => row._id || row.id}
         />
       )}
     </div>

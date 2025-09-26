@@ -83,3 +83,12 @@ export const roomColumns = [
     width: 100,
   },
 ];
+
+export const vehicleColumns = [
+  { field: "_id", headerName: "ID", width: 70 },
+  { field: "companyId", headerName: "Company ID", width: 100 },
+  { field: "brand", headerName: "Brand", width: 150 },
+  { field: "model", headerName: "Model", width: 150 },
+  { field: "year", headerName: "Year", width: 100 },
+  { field: "pricePerDay", headerName: "Price/Day", width: 120 },
+];

@@ -1,98 +1,140 @@
+import React, { useContext } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/newcopy/New";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { productInputs, userInputs } from "./fromSource";
-import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
-import { AuthContext } from "./context/AuthContext"; // adjust path to your context
-import { roomColumns, userColumns } from "./datatablesource";
-import { hotelColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
 
+import { productInputs, userInputs } from "./fromSource";
+import { roomColumns, userColumns, hotelColumns, vehicleColumns } from "./datatablesource";
 
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  
-  const ProtectedRoute = ({children}) =>{
-    const {user} = useContext(AuthContext)
-
-      if(!user){
-        return <Navigate to = "/login"/>
-      }
-      return children;
-  }
+  const ProtectedRoute = ({ children }) => {
+    const { user } = useContext(AuthContext);
+    if (!user) {
+      return <Navigate to="/login" />;
+    }
+    return children;
+  };
 
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/">
-           <Route path="login" element={<Login />} />
-            <Route index element={
+          {/* Login */}
+          <Route path="login" element={<Login />} />
+
+          {/* Home */}
+          <Route
+            path="/"
+            element={
               <ProtectedRoute>
-               <Home />
+                <Home />
               </ProtectedRoute>
-              } />
-            
-            <Route path="users">
-              <Route index element={   <ProtectedRoute>
-               <List columns = {userColumns} />
-              </ProtectedRoute>} />
-              <Route path=":userId" element={   <ProtectedRoute>
-               <Single />
-              </ProtectedRoute>} />
-              <Route
-                path="new"
-                element={<ProtectedRoute><New inputs={userInputs} title="Add New User"/></ProtectedRoute>}
-              />
-            </Route>
-            <Route path="hotels">
-              <Route index element={
-                <ProtectedRoute><List columns={hotelColumns} /></ProtectedRoute>} />
-              <Route path=":hotelId" element={<ProtectedRoute>
-                <Single />
-                </ProtectedRoute>} />
-              <Route
-                path="new"
-                element={
+            }
+          />
+
+          {/* Users */}
+          <Route path="users">
+            <Route
+              index
+              element={
                 <ProtectedRoute>
-                  <NewHotel/>
-                  </ProtectedRoute>
-                }
-                  />
-                  </Route>
-            
-            <Route path="rooms">
-  <Route
-    index
-    element={
-      <ProtectedRoute>
-        <List columns={roomColumns} />
-      </ProtectedRoute>
-    }
-  />
-  <Route
-    path=":roomId"
-    element={
-      <ProtectedRoute>
-        <Single />
-      </ProtectedRoute>
-    }
-  />
-  <Route
-    path="new"
-    element={
-      <ProtectedRoute>
-        <NewRoom />
-      </ProtectedRoute>
-    }
-  />
-</Route>
- </Route>
+                  <List columns={userColumns} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path=":userId"
+              element={
+                <ProtectedRoute>
+                  <Single />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="new"
+              element={
+                <ProtectedRoute>
+                  <New inputs={userInputs} title="Add New User" />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+
+          {/* Hotels */}
+          <Route path="hotels">
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <List columns={hotelColumns} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path=":hotelId"
+              element={
+                <ProtectedRoute>
+                  <Single />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="new"
+              element={
+                <ProtectedRoute>
+                  <NewHotel />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+
+          {/* Rooms */}
+          <Route path="rooms">
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <List columns={roomColumns} />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path=":roomId"
+              element={
+                <ProtectedRoute>
+                  <Single />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="new"
+              element={
+                <ProtectedRoute>
+                  <NewRoom />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+
+          {/* Vehicles */}
+          <Route path="vehicles">
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <List columns={vehicleColumns} />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
