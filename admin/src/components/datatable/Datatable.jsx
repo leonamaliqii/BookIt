@@ -52,15 +52,13 @@ const Datatable = ({columns}) => {
 const handleDelete = async (id, hotelId) => {
   try {
     let url = `http://localhost:8800/api/${path}/${id}`;
-    if (path === "rooms") {
-      url += `/${hotelId}`; // only add hotelId for rooms
-    }
+    if (path === "rooms") url += `/${hotelId}`; // rooms need hotelId
 
     await axios.delete(url, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
-    setList(list.filter((item) => (item._id || item.id) !== id));
+    setList(list.filter((item) => item._id || item.id ? (item._id || item.id) !== id : true));
   } catch (err) {
     console.error("Delete failed:", err.response?.data || err.message);
   }

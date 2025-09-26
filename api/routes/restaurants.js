@@ -37,6 +37,23 @@ router.get("/find/:id", async (req, res) => {
   }
 });
 
+// DELETE /api/restaurants/:id
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query(
+      "DELETE FROM restaurants WHERE id = $1 RETURNING *",
+      [id]
+    );
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+    res.json({ message: "Restaurant deleted successfully" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 
 export default router;

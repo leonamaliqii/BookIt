@@ -10,7 +10,13 @@ import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
 
 import { productInputs, userInputs } from "./fromSource";
-import { roomColumns, userColumns, hotelColumns, vehicleColumns } from "./datatablesource";
+import { 
+  roomColumns, 
+  userColumns, 
+  hotelColumns, 
+  vehicleColumns, 
+  restaurantColumns 
+} from "./datatablesource";
 
 import { AuthContext } from "./context/AuthContext";
 
@@ -135,6 +141,19 @@ function App() {
               }
             />
           </Route>
+
+          {/* Restaurants */}
+          <Route path="restaurants">
+            <Route
+              index
+              element={
+                <ProtectedRoute>
+                  <List columns={restaurantColumns} />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
+
         </Routes>
       </BrowserRouter>
     </div>

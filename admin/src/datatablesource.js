@@ -92,3 +92,12 @@ export const vehicleColumns = [
   { field: "year", headerName: "Year", width: 100 },
   { field: "pricePerDay", headerName: "Price/Day", width: 120 },
 ];
+
+export const restaurantColumns = [
+  { field: "_id", headerName: "ID", width: 70 },
+  { field: "name", headerName: "Name", width: 200 },
+  { field: "city", headerName: "City", width: 120 },
+  { field: "address", headerName: "Address", width: 250 },
+  { field: "type", headerName: "Type", width: 150 },
+  { field: "rating", headerName: "Rating", width: 100 },
+];
