@@ -8,7 +8,7 @@ import Single from "./pages/single/Single";
 import New from "./pages/newcopy/New";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
-import NewRestaurant from "./pages/newRestaurant/NewRestaurant";
+import NewRestaurant from "./pages/newRestaurant/newRestaurant";
 import NewCompany from "./pages/newCompany/NewCompany";
 import UpdateCompany from "./pages/updateCompany/UpdateCompany";
 import UpdateUser from "./pages/updateUser/UpdateUser";
