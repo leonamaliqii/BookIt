@@ -3,12 +3,14 @@ import Room from '../models/Room.js';
 
 // CREATE
 export const createHotel = async (req, res, next) => {
+  console.log("Received hotel data:", req.body); // <--- see what frontend sends
   const newHotel = new Hotel(req.body);
   try {
     const savedHotel = await newHotel.save();
     res.status(201).json(savedHotel);
   } catch (err) {
-    next(err);
+    console.error("Error creating hotel:", err); // <--- log exact Mongoose error
+    res.status(500).json({ message: err.message });
   }
 };
 

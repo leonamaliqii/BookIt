@@ -8,6 +8,8 @@ import Single from "./pages/single/Single";
 import New from "./pages/newcopy/New";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
+import NewRestaurant from "./pages/newRestaurant/NewRestaurant";
+
 
 import { productInputs, userInputs } from "./fromSource";
 import { 
@@ -153,7 +155,14 @@ function App() {
                 </ProtectedRoute>
               }
             />
-          </Route>
+          < Route  path="new"
+    element={
+      <ProtectedRoute>
+        <NewRestaurant />
+      </ProtectedRoute>
+    }
+  />
+</Route> 
 
           {/* Companies */}
           <Route path="companies">

@@ -85,16 +85,16 @@ export const roomColumns = [
 ];
 
 export const vehicleColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
-  { field: "companyId", headerName: "Company ID", width: 100 },
+  { field: "id", headerName: "ID", width: 70 },
+  { field: "company_id", headerName: "Company ID", width: 100 },
   { field: "brand", headerName: "Brand", width: 150 },
   { field: "model", headerName: "Model", width: 150 },
   { field: "year", headerName: "Year", width: 100 },
-  { field: "pricePerDay", headerName: "Price/Day", width: 120 },
+  { field: "price_per_day", headerName: "Price/Day", width: 120 },
 ];
 
 export const restaurantColumns = [
-  { field: "_id", headerName: "ID", width: 70 },
+  { field: "id", headerName: "ID", width: 70 },
   { field: "name", headerName: "Name", width: 200 },
   { field: "city", headerName: "City", width: 120 },
   { field: "address", headerName: "Address", width: 250 },

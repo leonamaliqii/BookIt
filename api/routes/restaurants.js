@@ -1,6 +1,6 @@
 // routes/restaurants.js
 import express from "express";
-import {pool} from "../db.js"; 
+import { pool } from "../db.js";
 
 const router = express.Router();
 
@@ -8,8 +8,8 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   const city = req.query.city;
   try {
-    const query = city 
-      ? "SELECT * FROM restaurants WHERE city = $1" 
+    const query = city
+      ? "SELECT * FROM restaurants WHERE city = $1"
       : "SELECT * FROM restaurants";
     const values = city ? [city] : [];
     const result = await pool.query(query, values);
@@ -19,7 +19,8 @@ router.get("/", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-//GET /api/restaurants/find/:id
+
+// GET /api/restaurants/find/:id
 router.get("/find/:id", async (req, res) => {
   const { id } = req.params;
   try {
@@ -31,6 +32,29 @@ router.get("/find/:id", async (req, res) => {
       return res.status(404).json({ message: "Restaurant not found" });
     }
     res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+// POST /api/restaurants
+router.post("/", async (req, res) => {
+  const { name, city, address, cuisine, description, photos } = req.body;
+
+  // Basic validation
+  if (!name || !city || !address) {
+    return res.status(400).json({ message: "Name, city, and address are required" });
+  }
+
+  try {
+    const result = await pool.query(
+      `INSERT INTO restaurants (name, city, address, cuisine, description, photos)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [name, city, address, cuisine, description, JSON.stringify(photos)]
+    );
+
+    res.status(201).json(result.rows[0]);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Server error" });
@@ -54,6 +78,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
 
 export default router;
