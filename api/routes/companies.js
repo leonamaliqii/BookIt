@@ -4,6 +4,30 @@ import { pool } from "../db.js";
 
 const router = express.Router();
 
+
+// POST /api/companies
+router.post("/", async (req, res) => {
+  const { name, city, description, logo, photo, phone, address } = req.body;
+
+  // Basic validation
+  if (!name || !city || !description) {
+    return res.status(400).json({ message: "Name, city, and description are required" });
+  }
+
+  try {
+    const result = await pool.query(
+      `INSERT INTO companies (name, city, description, logo, photo, phone, address)
+       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+      [name, city, description, logo, photo, phone, address]
+    );
+
+    res.status(201).json(result.rows[0]);
+  } catch (err) {
+    console.error("POST /api/companies error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 // Count companies by city
 router.get("/countByCity", async (req, res) => {
   const { cities } = req.query; // expects "Prishtine,Gjakove,Peja"

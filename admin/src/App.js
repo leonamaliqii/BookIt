@@ -9,7 +9,7 @@ import New from "./pages/newcopy/New";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
 import NewRestaurant from "./pages/newRestaurant/NewRestaurant";
-
+import NewCompany from "./pages/newCompany/NewCompany";
 
 import { productInputs, userInputs } from "./fromSource";
 import { 
@@ -174,7 +174,15 @@ function App() {
                 </ProtectedRoute>
               }
             />
-          </Route>
+          <Route  
+           path="new"
+    element={
+      <ProtectedRoute>
+        <NewCompany />
+      </ProtectedRoute>
+    }
+  />
+</Route>
 
         </Routes>
       </BrowserRouter>
