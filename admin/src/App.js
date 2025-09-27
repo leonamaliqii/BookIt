@@ -8,12 +8,13 @@ import Single from "./pages/single/Single";
 import New from "./pages/newcopy/New";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
-import NewRestaurant from "./pages/newRestaurant/newRestaurant";
+import NewRestaurant from "./pages/newRestaurant/NewRestaurant";
 import NewCompany from "./pages/newCompany/NewCompany";
 import UpdateCompany from "./pages/updateCompany/UpdateCompany";
 import UpdateUser from "./pages/updateUser/UpdateUser";
 import UpdateHotel from "./pages/updateHotel/UpdateHotel"; 
-import { productInputs, userInputs, hotelInputs } from "./fromSource";
+import UpdateRoom from "./pages/updateRoom/UpdateRoom";
+import {  userInputs, hotelInputs, roomInputs } from "./fromSource";
 import { 
   roomColumns, 
   userColumns, 
@@ -151,7 +152,11 @@ function App() {
                 </ProtectedRoute>
               }
             />
-          </Route>
+           <Route
+  path="/rooms/update/:roomId"
+  element={<UpdateRoom inputs={roomInputs} title="Update Room" />}
+/>
+</Route>
 
           {/* Vehicles */}
           <Route path="vehicles">
