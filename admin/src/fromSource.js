@@ -154,3 +154,47 @@ export const vehicleInputs = [
   { id: "year", label: "Year", type: "number", placeholder: "2023" },
   { id: "price_per_day", label: "Price per day (€)", type: "number", placeholder: "50.00" },
 ];
+export const restaurantInputs = [
+  {
+    id: "name",
+    label: "Name",
+    type: "text",
+    placeholder: "My Restaurant",
+  },
+  {
+    id: "type",
+    label: "Type",
+    type: "text",
+    placeholder: "Cafe / Diner / Bar",
+  },
+  {
+    id: "city",
+    label: "City",
+    type: "text",
+    placeholder: "New York",
+  },
+  {
+    id: "address",
+    label: "Address",
+    type: "text",
+    placeholder: "123 Main St",
+  },
+  {
+    id: "rating",
+    label: "Rating",
+    type: "number",
+    placeholder: "4.5",
+  },
+  {
+    id: "desc",
+    label: "Description",
+    type: "text",
+    placeholder: "Best place for breakfast",
+  },
+  {
+    id: "cheapestPrice",
+    label: "Average Price",
+    type: "text",
+    placeholder: "20",
+  },
+];

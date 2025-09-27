@@ -8,14 +8,15 @@ import Single from "./pages/single/Single";
 import New from "./pages/newcopy/New";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
-import NewRestaurant from "./pages/newRestaurant/NewRestaurant";
+import NewRestaurant from "./pages/newRestaurant/newRestaurant";
 import NewCompany from "./pages/newCompany/NewCompany";
 import UpdateCompany from "./pages/updateCompany/UpdateCompany";
 import UpdateUser from "./pages/updateUser/UpdateUser";
 import UpdateHotel from "./pages/updateHotel/UpdateHotel"; 
 import UpdateRoom from "./pages/updateRoom/UpdateRoom";
 import UpdateVehicle from "./pages/updateVehicle/UpdateVehicle";
-import {  userInputs, hotelInputs, roomInputs, vehicleInputs } from "./fromSource";
+import UpdateRestaurant from "./pages/updateRestaurant/UpdateResaturant";
+import {  userInputs, hotelInputs, roomInputs, vehicleInputs, restaurantInputs } from "./fromSource";
 import { 
   roomColumns, 
   userColumns, 
@@ -189,6 +190,14 @@ function App() {
     element={
       <ProtectedRoute>
         <NewRestaurant />
+      </ProtectedRoute>
+    }
+  />
+   <Route
+    path="update/:restaurantId"
+    element={
+      <ProtectedRoute>
+        <UpdateRestaurant inputs={restaurantInputs} title="Update Restaurant" />
       </ProtectedRoute>
     }
   />

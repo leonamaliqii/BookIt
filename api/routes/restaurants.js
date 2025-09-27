@@ -78,5 +78,30 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+// UPDATE restaurant
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, city, address, cuisine, description, photos } = req.body;
+
+  try {
+    const result = await pool.query(
+      `UPDATE restaurants
+       SET name = $1, city = $2, address = $3, cuisine = $4, description = $5, photos = $6
+       WHERE id = $7
+       RETURNING *`,
+      [name, city, address, cuisine, description, JSON.stringify(photos), id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Restaurant not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 
 export default router;
