@@ -67,33 +67,43 @@ const Datatable = ({ columns }) => {
   };
 
   // Action column
-  const actionColumn = [
-    {
-      field: "action",
-      headerName: "Action",
-      width: 200,
-      renderCell: (params) => {
-        const itemId = params.row._id || params.row.id;
-        return (
-          <div className="cellAction">
-            <Link to={`/${path}/${itemId}`} style={{ textDecoration: "none" }}>
-              <div className="viewButton">View</div>
-            </Link>
-            <div
-              className="deleteButton"
-              onClick={() =>
-                path === "rooms"
-                  ? handleDelete(itemId, params.row.hotelId)
-                  : handleDelete(itemId)
-              }
-            >
-              Delete
-            </div>
+// Action column: View, Edit, Delete
+const actionColumn = [
+  {
+    field: "action",
+    headerName: "Action",
+    width: 250, // increase width for the extra button
+    renderCell: (params) => {
+      const itemId = params.row._id || params.row.id; // works for both Mongo (_id) and PostgreSQL (id)
+      return (
+        <div className="cellAction">
+          {/* View button: goes to single item page */}
+          <Link to={`/${path}/${itemId}`} style={{ textDecoration: "none" }}>
+            <div className="viewButton">View</div>
+          </Link>
+
+          {/* Edit button: goes to update page */}
+          <Link to={`/${path}/update/${itemId}`} style={{ textDecoration: "none" }}>
+            <div className="editButton">Edit</div>
+          </Link>
+
+          {/* Delete button: calls handleDelete */}
+          <div
+            className="deleteButton"
+            onClick={() =>
+              path === "rooms"
+                ? handleDelete(itemId, params.row.hotelId)
+                : handleDelete(itemId)
+            }
+          >
+            Delete
           </div>
-        );
-      },
+        </div>
+      );
     },
-  ];
+  },
+];
+
 
   return (
     <div className="datatable">

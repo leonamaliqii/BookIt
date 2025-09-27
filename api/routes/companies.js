@@ -135,5 +135,31 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// UPDATE /api/companies/:id
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  const { name, city, address, description, logo, photo, phone } = req.body;
+
+  try {
+    const result = await pool.query(
+      `UPDATE companies
+       SET name = $1, city = $2, address = $3, description = $4, logo = $5, photo = $6, phone = $7
+       WHERE id = $8
+       RETURNING *`,
+      [name, city, address, description, logo, photo, phone, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "Company not found" });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 
 export default router;
