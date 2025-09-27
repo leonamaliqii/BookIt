@@ -48,12 +48,7 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <Link to="/hotel-bookings" style={{ textDecoration: "none" }}>
-            <li>
-              <EventIcon className="icon" />
-              <span>Hotel Bookings</span>
-            </li>
-          </Link>
+       
 
           <Link to="/restaurants" style={{ textDecoration: "none" }}>
             <li>
@@ -62,12 +57,6 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <Link to="/restaurant-reservations" style={{ textDecoration: "none" }}>
-            <li>
-              <EventIcon className="icon" />
-              <span>Restaurant Reservations</span>
-            </li>
-          </Link>
 
           <Link to="/vehicles" style={{ textDecoration: "none" }}>
             <li>
@@ -76,12 +65,7 @@ const Sidebar = () => {
             </li>
           </Link>
 
-          <Link to="/car-bookings" style={{ textDecoration: "none" }}>
-            <li>
-              <EventIcon className="icon" />
-              <span>Car Bookings</span>
-            </li>
-          </Link>
+    
 
           <Link to="/companies" style={{ textDecoration: "none" }}>
             <li>
