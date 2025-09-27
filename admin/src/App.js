@@ -11,6 +11,7 @@ import NewRoom from "./pages/newRoom/NewRoom";
 import NewRestaurant from "./pages/newRestaurant/NewRestaurant";
 import NewCompany from "./pages/newCompany/NewCompany";
 import UpdateCompany from "./pages/updateCompany/UpdateCompany";
+import UpdateUser from "./pages/updateUser/UpdateUser";
 import { productInputs, userInputs } from "./fromSource";
 import { 
   roomColumns, 
@@ -76,6 +77,15 @@ function App() {
               }
             />
           </Route>
+          <Route
+  path="users/update/:id"
+  element={
+    <ProtectedRoute>
+      <UpdateUser inputs={userInputs} title="Update User" />
+    </ProtectedRoute>
+  }
+/>
+
 
           {/* Hotels */}
           <Route path="hotels">
