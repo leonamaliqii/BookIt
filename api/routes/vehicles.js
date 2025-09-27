@@ -46,14 +46,15 @@ router.post('/', async (req, res) => {
 });
 
 // PUT update vehicle by id
+
 router.put('/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const { brand, model, year, price_per_day, available } = req.body;
+    const { company_id, brand, model, year, price_per_day, photo } = req.body;
 
     const result = await pool.query(
-      'UPDATE vehicles SET brand=$1, model=$2, year=$3, price_per_day=$4, available=$5 WHERE id=$6 RETURNING *',
-      [brand, model, year, price_per_day, available, id]
+      'UPDATE vehicles SET company_id=$1, brand=$2, model=$3, year=$4, price_per_day=$5, photo=$6 WHERE id=$7 RETURNING *',
+      [company_id, brand, model, year, price_per_day, photo, id]
     );
 
     if (result.rows.length === 0) return res.status(404).send('Vehicle not found');
@@ -63,6 +64,7 @@ router.put('/:id', async (req, res) => {
     res.status(500).send('Server error');
   }
 });
+
 
 // DELETE a vehicle by id
 router.delete('/:id', async (req, res) => {

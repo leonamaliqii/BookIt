@@ -146,3 +146,11 @@ export const roomInputs = [
     placeholder: "2",
   },
 ];
+
+export const vehicleInputs = [
+  { id: "company_id", label: "Company ID", type: "number", placeholder: "1" },
+  { id: "brand", label: "Brand", type: "text", placeholder: "BMW" },
+  { id: "model", label: "Model", type: "text", placeholder: "X5" },
+  { id: "year", label: "Year", type: "number", placeholder: "2023" },
+  { id: "price_per_day", label: "Price per day (€)", type: "number", placeholder: "50.00" },
+];

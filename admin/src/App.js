@@ -14,7 +14,8 @@ import UpdateCompany from "./pages/updateCompany/UpdateCompany";
 import UpdateUser from "./pages/updateUser/UpdateUser";
 import UpdateHotel from "./pages/updateHotel/UpdateHotel"; 
 import UpdateRoom from "./pages/updateRoom/UpdateRoom";
-import {  userInputs, hotelInputs, roomInputs } from "./fromSource";
+import UpdateVehicle from "./pages/updateVehicle/UpdateVehicle";
+import {  userInputs, hotelInputs, roomInputs, vehicleInputs } from "./fromSource";
 import { 
   roomColumns, 
   userColumns, 
@@ -168,7 +169,11 @@ function App() {
                 </ProtectedRoute>
               }
             />
-          </Route>
+          <Route 
+  path="/vehicles/update/:vehicleId"
+  element={<UpdateVehicle inputs={vehicleInputs} title="Update Vehicle" />}
+/>
+</Route>
 
           {/* Restaurants */}
           <Route path="restaurants">
