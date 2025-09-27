@@ -33,6 +33,7 @@ const Datatable = ({ columns }) => {
       try {
         const res = await axios.get(`http://localhost:8800/api/${path}`, {
           headers: { Authorization: `Bearer ${token}` },
+           withCredentials: true,
         });
         setData(res.data);
         setError(null);

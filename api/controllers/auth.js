@@ -71,10 +71,19 @@ export const login = async (req, res, next) => {
     const token = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT || "secretkey", // fallback secret
-      { expiresIn: "1d" }
+      { expiresIn: "30d" }
     );
 
     const { password: pwd, ...userDetails } = user._doc;
+
+
+     // Set cookie
+    res.cookie("access_token", token, {
+      httpOnly: true,       
+      secure: false,        
+      sameSite: "lax",      
+      maxAge: 30 * 24 * 60 * 60 * 1000, 
+    });
 
     return res.status(200).json({
       details: userDetails,
