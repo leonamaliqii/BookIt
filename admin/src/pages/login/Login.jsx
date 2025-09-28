@@ -29,17 +29,19 @@ const Login = () => {
 
       console.log("Logged in user:", res.data);
 
-      if (res.data.isAdmin) {
-        // Dispatch success with user details
-        dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      const userDetails = {
+        ...res.data.details,
+        isAdmin: res.data.isAdmin, // marr nga backend
+      };
 
-        // Store JWT token in localStorage
+      // Vetëm admin mund të hyjë
+      if (userDetails.isAdmin) {
+        dispatch({ type: "LOGIN_SUCCESS", payload: userDetails });
+
         localStorage.setItem("token", res.data.accessToken);
+        localStorage.setItem("user", JSON.stringify(userDetails));
 
-        // Optional: store user info
-        localStorage.setItem("user", JSON.stringify(res.data.details));
-
-        navigate("/"); // redirect to dashboard
+        navigate("/"); // redirect te dashboard
       } else {
         dispatch({
           type: "LOGIN_FAILURE",
@@ -48,10 +50,24 @@ const Login = () => {
       }
     } catch (err) {
       console.log("Error response:", err.response?.data);
-      dispatch({
-        type: "LOGIN_FAILURE",
-        payload: err.response?.data || { message: "Something went wrong" },
-      });
+
+      // Trajto gabime sipas status
+      if (err.response?.status === 403) {
+        dispatch({
+          type: "LOGIN_FAILURE",
+          payload: { message: "You are not admin!" },
+        });
+      } else if (err.response?.status === 400 || err.response?.status === 404) {
+        dispatch({
+          type: "LOGIN_FAILURE",
+          payload: { message: "Wrong username or password!" },
+        });
+      } else {
+        dispatch({
+          type: "LOGIN_FAILURE",
+          payload: { message: "Something went wrong" },
+        });
+      }
     }
   };
 

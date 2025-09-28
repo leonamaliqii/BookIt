@@ -29,13 +29,17 @@ import {
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
-  const ProtectedRoute = ({ children }) => {
-    const { user } = useContext(AuthContext);
-    if (!user) {
-      return <Navigate to="/login" />;
-    }
-    return children;
-  };
+const ProtectedRoute = ({ children }) => {
+  const { user } = useContext(AuthContext);
+
+  // Kontrollo nëse user ekziston dhe është admin
+  if (!user || !user.isAdmin) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
 
   return (
     <div className="App">
