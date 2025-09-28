@@ -31,17 +31,23 @@ router.get('/:id', async (req, res) => {
 // POST a new vehicle
 router.post('/', async (req, res) => {
   try {
-    const { brand, model, year, price_per_day, available } = req.body;
+    const { company_id, brand, model, year, price_per_day, photo } = req.body;
+
+    // Basic validation
+    if (!company_id || !brand || !model || !price_per_day) {
+      return res.status(400).json({ message: "Company, brand, model, and price are required" });
+    }
 
     const result = await pool.query(
-      'INSERT INTO vehicles (brand, model, year, price_per_day, available) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [brand, model, year, price_per_day, available]
+      `INSERT INTO vehicles (company_id, brand, model, year, price_per_day, photo)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [company_id, brand, model, year || null, price_per_day, photo || null]
     );
 
-    res.json(result.rows[0]);
+    res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server error');
+    console.error("POST /api/vehicles error:", err);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

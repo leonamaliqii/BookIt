@@ -10,6 +10,7 @@ import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
 import NewRestaurant from "./pages/newRestaurant/NewRestaurant";
 import NewCompany from "./pages/newCompany/NewCompany";
+import NewVehicle from "./pages/newVehicle/NewVehicle";
 import UpdateCompany from "./pages/updateCompany/UpdateCompany";
 import UpdateUser from "./pages/updateUser/UpdateUser";
 import UpdateHotel from "./pages/updateHotel/UpdateHotel"; 
@@ -160,21 +161,38 @@ function App() {
 />
 </Route>
 
-          {/* Vehicles */}
-          <Route path="vehicles">
-            <Route
-              index
-              element={
-                <ProtectedRoute>
-                  <List columns={vehicleColumns} />
-                </ProtectedRoute>
-              }
-            />
-          <Route 
-  path="/vehicles/update/:vehicleId"
-  element={<UpdateVehicle inputs={vehicleInputs} title="Update Vehicle" />}
-/>
+<Route path="vehicles">
+  {/* List of vehicles */}
+  <Route
+    index
+    element={
+      <ProtectedRoute>
+        <List columns={vehicleColumns} />
+      </ProtectedRoute>
+    }
+  />
+
+  {/* Add new vehicle */}
+  <Route
+    path="new"
+    element={
+      <ProtectedRoute>
+        <NewVehicle />
+      </ProtectedRoute>
+    }
+  />
+
+  {/* Update vehicle */}
+  <Route
+    path="update/:vehicleId"
+    element={
+      <ProtectedRoute>
+        <UpdateVehicle inputs={vehicleInputs} title="Update Vehicle" />
+      </ProtectedRoute>
+    }
+  />
 </Route>
+
 
           {/* Restaurants */}
           <Route path="restaurants">
