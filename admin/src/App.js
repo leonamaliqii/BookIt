@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";
 import List from "./pages/list/List";
-import Single from "./pages/single/Single";
 import New from "./pages/newcopy/New";
 import NewHotel from "./pages/newHotel/NewHotel";
 import NewRoom from "./pages/newRoom/NewRoom";
@@ -65,14 +64,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path=":userId"
-              element={
-                <ProtectedRoute>
-                  <Single />
-                </ProtectedRoute>
-              }
-            />
+  
             <Route
               path="new"
               element={
@@ -102,14 +94,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path=":hotelId"
-              element={
-                <ProtectedRoute>
-                  <Single />
-                </ProtectedRoute>
-              }
-            />
+       
             <Route
               path="new"
               element={
@@ -139,14 +124,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path=":roomId"
-              element={
-                <ProtectedRoute>
-                  <Single />
-                </ProtectedRoute>
-              }
-            />
+       
             <Route
               path="new"
               element={
