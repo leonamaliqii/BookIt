@@ -1,51 +1,53 @@
-.navbar{
-    height:50px;
-    background-color: rgb(3, 3, 46);
-    display: flex;
-    justify-content: center;
+.navbar {
+  height: 50px;
+  background-color: rgb(3, 3, 46);
+  display: flex;
+  justify-content: center;
 }
 
-.navContainer{
-    width: 100%;
-    max-width: 1024px;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-}
-
-.logo{
-  font-weight: 500;  
-}
-
-.navButton{
-    /*margin-left:20px;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    background-color: #c6007e;
-    color: white;*/
-      border: none;
-  padding: 8px 16px;
-  background: #c6007e;
+.navContainer {
+  width: 100%;
+  max-width: 1024px;
   color: white;
-  font-weight: bold;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    margin-right: 10px;
-   
-    
-}
-.navButton:hover {
-  background: #3f4bbd;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.navButton:active {
+.logo {
+  font-weight: 500;
+}
+
+.navItems {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto; 
+}
+
+.username {
+  font-weight: bold;
+  color: white;
+}
+
+/* Styled logout, login, and register buttons */
+.headerBtn {
+  background-color: #c6007e;
+  color: white;
+  font-weight: 500;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px; 
+}
+
+.headerBtn:hover {
+  background-color: #a50068;
+  transform: translateY(-2px);
+}
+
+.headerBtn:active {
   transform: translateY(1px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
